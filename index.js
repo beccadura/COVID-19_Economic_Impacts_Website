@@ -7,8 +7,7 @@ app.use(bodyparser.json());
 
 var mysqlConnection = mysql.createConnection({
 	host:'localhost',
-	user:'hezkiel',
-	password:'hezkiel',
+	user:'root',
 	database:'sitepoint'
 });
 
