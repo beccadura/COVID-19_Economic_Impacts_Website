@@ -1,7 +1,7 @@
 # csci5707proj
-csci5707 Team 9 project COVID-19 Informational Website
+## csci5707 Team 9 project COVID-19 Informational Website
 
-The summary:
+### The Steps:
 1. Install XAMPP 7.4.10 with your appropriate OS
 https://www.apachefriends.org/download.html
 
@@ -16,7 +16,7 @@ http://localhost/phpmyadmin
 
 Go to Tab SQL
 Run Query:
-'''
+'''SQL
 CREATE DATABASE sitepoint CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE sitepoint;
 
@@ -32,19 +32,21 @@ INSERT INTO authors (id, name, city) VALUES
 (2, 'Michael Wanyoike', 'Nairobi'),
 (3, 'James Hibbard', 'Munich'),
 (4, 'Karolina Gawron', 'Wrocław');
-
 '''
 
 5. Clone all these files to your local project folder
 
 6. Install all prerequisites
 Open Terminal and go to the project folder
+'''
 $ npm install
+'''
+### Optional Steps 7-9
 
-Optional Steps 7-9
 7. Try the /index.js website 
+'''
 $ node index.js
-
+'''
 output:
 express server is running at port 3000
 DB connection successful!
