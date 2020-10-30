@@ -41,24 +41,13 @@ Open Terminal and go to the project folder
 ```
 $ npm install
 ```
-### Optional Steps 7-9
-
-7. Try the /index.js website 
+7. start the template website (this uses server.js). remember, do step (3) Open XAMPP control panel and switch on the MySQL and Apache Server
 ```
-$ node index.js
+$ npm start
 ```
 output:
-express server is running at port 3000
+express server is running at port 8080
 DB connection successful!
 
-8. Try http://localhost:3000
-output:
-Cannot GET /
-
-9. Try http://localhost:3000/employees
-output:
-[{"id":1,"name":"Michaela Lehr","city":"Berlin"},{"id":2,"name":"Michael Wanyoike","city":"Nairobi"},{"id":3,"name":"James Hibbard","city":"Munich"},{"id":4,"name":"Karolina Gawron","city":"Wrocław"}]
-
-Optional: you can install JSON Formatter Chrome extension for better JSON viewing
-
-10. The templated COVID-19 website is /web/index.html
+8. Try http://localhost:8080
+if all goes well, should be the same with the screenshot
