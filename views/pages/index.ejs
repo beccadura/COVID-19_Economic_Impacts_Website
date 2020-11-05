@@ -25,8 +25,8 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="#intro" class="active">Introduction</a></li>
-							<li><a href="#first">First Section</a></li>
+							<li><a href="#intro" class="active">Global Cases</a></li>
+							<li><a href="#first">Top Cases</a></li>
 							<li><a href="#second">Second Section</a></li>
 							<li><a href="#third">Third Section</a></li>
 							<li><a href="#fourth">Fourth Section</a></li>
@@ -38,131 +38,143 @@
 					<div id="main">
 
 						<!-- Introduction -->
-							<section id="intro" class="main">
-								<div class="spotlight">
-									<div class="content">
-										<header class="major">
-											<h2>Ipsum sed adipiscing</h2>
-										</header>
-										<% listnames.forEach(function(name) { %>
-											<p><%= name %></p>
-											<% }); %>
-										<ul class="actions">
-											<li><a href="generic.html" class="button">Learn More</a></li>
-										</ul>
-									</div>
-									<span class="image"><img src="images/pic01.jpg" alt="" /></span>
+						<section id="intro" class="main special">
+							<header class="major">
+								<h2>COVID-19 Global Cases</h2>
+							</header>
+							<ul class="features">
+								<li>Search by Country: <input type="text" id="search_gc_country" placeholder="Country name"> <br\></li>
+							</ul>
+							<div class="table_wrap">
+								<div class="table_header">
+									<ul>
+										<li>
+											<div class="item">
+												<div class="gccountry" style="height:inherit;">
+													<span>COUNTRY</span>
+												</div>
+												<div class="gcncases" style="height:inherit;">
+													<span>NEW CASES</span>
+												</div>
+												<div class="gcccases" style="height:inherit;">
+													<span>CUMULATIVE CASES</span>
+												</div>
+												<div class="gcndeaths" style="height:inherit;">
+													<span>NEW DEATHS</span>
+												</div>
+												<div class="gccdeaths" style="height:inherit;">
+													<span>CUMULATIVE DEATHS</span>
+												</div>
+											</div>
+										</li>
+									</ul>
 								</div>
-							</section>
+								<div class="table_body">
+									<ul id="gcitem">
+									<% 
+										if(global_covid.length!=0){
+											global_covid.forEach(function(gc){ 
+									%>
+										<li style="display: block;">
+											<div class="item">
+												<div class="gccountry" style="height:inherit;">
+													<span><%=gc.country %></span>
+												</div>
+												<div class="gcncases" style="height:inherit;">
+													<span><%=gc.new_cases %></span>
+												</div>
+												<div class="gcccases" style="height:inherit;">
+													<span><%=gc.cumulative_cases %></span>
+												</div>
+												<div class="gcndeaths" style="height:inherit;">
+													<span><%=gc.new_deaths %></span>
+												</div>
+												<div class="gccdeaths" style="height:inherit;">
+													<span><%=gc.cumulative_deaths %></span>
+												</div>
+											</div>
+										</li>
+									<% 		}) %>
+									<% 	} else { %>
+										<li style="display: block;">
+											<div class="item">
+												<span>NO DATA FOUND</span>
+											</div>
+										</li>
+									<% 	} %>
+									</ul>
+								</div>
+								<div class="table_footer"></div>
+							</div>
+							<footer class="major">
+								<ul>
+									<li>in progress: sorting</li>
+									<li>Table last update: 2020-10-25</li>
+								</ul>
+							</footer>
+						</section>
 
 						<!-- First Section -->
-							<section id="first" class="main special">
-								<header class="major">
-									<h2>Magna veroeros</h2>
-								</header>
-								<canvas id="clients" width=500 height=400></canvas>
-							</section>
+						<section id="first" class="main">
+							<header class="major">
+								<h2>Top Cases</h2>
+							</header>
+							<canvas id="global_covid" width=500 height=400></canvas>
+							<footer class="major">
+								<ul>
+									<li>in progress: search country</li>
+									<li> checkboxes for dataset to display</li>
+								</ul>
+							</footer>
+						</section>
 
 						<!-- Second Section -->
-							<section id="second" class="main special">
-								<header class="major">
-									<h2>Ipsum consequat</h2>
-									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
-									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
-								</header>
-								<ul class="statistics">
-									<li class="style1">
-										<span class="icon solid fa-code-branch"></span>
-										<strong>5,120</strong> Etiam
-									</li>
-									<li class="style2">
-										<span class="icon fa-folder-open"></span>
-										<strong>8,192</strong> Magna
-									</li>
-									<li class="style3">
-										<span class="icon solid fa-signal"></span>
-										<strong>2,048</strong> Tempus
-									</li>
-									<li class="style4">
-										<span class="icon solid fa-laptop"></span>
-										<strong>4,096</strong> Aliquam
-									</li>
-									<li class="style5">
-										<span class="icon fa-gem"></span>
-										<strong>1,024</strong> Nullam
-									</li>
+						<section id="second" class="main special">
+							<div class="spotlight">
+								<div class="content">
+									<header class="major">
+										<h2>Population</h2>
+									</header>
+								</div>
+							</div>
+							<canvas id="global_population" width=500 height=400></canvas>
+							<footer class="major">
+								<ul>
+									<li>in progress: search country </li>
+									<li>checkbox for dataset to display</li>
 								</ul>
-								<p class="content">Nam elementum nisl et mi a commodo porttitor. Morbi sit amet nisl eu arcu faucibus hendrerit vel a risus. Nam a orci mi, elementum ac arcu sit amet, fermentum pellentesque et purus. Integer maximus varius lorem, sed convallis diam accumsan sed. Etiam porttitor placerat sapien, sed eleifend a enim pulvinar faucibus semper quis ut arcu. Ut non nisl a mollis est efficitur vestibulum. Integer eget purus nec nulla mattis et accumsan ut magna libero. Morbi auctor iaculis porttitor. Sed ut magna ac risus et hendrerit scelerisque. Praesent eleifend lacus in lectus aliquam porta. Cras eu ornare dui curabitur lacinia.</p>
-								<footer class="major">
-									<ul class="actions special">
-										<li><a href="generic.html" class="button">Learn More</a></li>
-									</ul>
-								</footer>
-							</section>
+							</footer>
+						</section>
 
 						<!-- Third Section -->
 							<section id="third" class="main">
 								<header class="major">
-									<h2>Magna veroeros</h2>
+									<h2>Economic data</h2>
 								</header>
-								<ul class="features">
-									<li>
-										<span class="icon solid major style1 fa-code"></span>
-										<h3>Ipsum consequat</h3>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
-									</li>
-									<li>
-										<span class="icon major style3 fa-copy"></span>
-										<h3>Amed sed feugiat</h3>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
-									</li>
-									<li>
-										<span class="icon major style5 fa-gem"></span>
-										<h3>Dolor nullam</h3>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
-									</li>
-								</ul>
 								<footer class="major">
-									<ul class="actions special">
-										<li><a href="generic.html" class="button">Learn More</a></li>
-									</ul>
+									<ul>
+										<li>in progress: dataset </li>
+										<li>checkbox for dataset column to display</li>
+									</p>
 								</footer>
 							</section>
 
 						<!-- Fourth Section -->
 							<section id="fourth" class="main special">
 								<header class="major">
-									<h2>Magna veroeros</h2>
+									<h2>combinations</h2>
 								</header>
-								<ul class="features">
-									<li>
-										<span class="icon solid major style1 fa-code"></span>
-										<h3>Ipsum consequat</h3>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
-									</li>
-									<li>
-										<span class="icon major style3 fa-copy"></span>
-										<h3>Amed sed feugiat</h3>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
-									</li>
-									<li>
-										<span class="icon major style5 fa-gem"></span>
-										<h3>Dolor nullam</h3>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
-									</li>
-								</ul>
 								<footer class="major">
-									<ul class="actions special">
-										<li><a href="generic.html" class="button">Learn More</a></li>
-									</ul>
+									<p>
+										still need to figure out
+									</p>
 								</footer>
 							</section>
 						<!-- Get Started -->
 							<section id="cta" class="main special">
 								<header class="major">
-									<h2>Congue imperdiet</h2>
-									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
-									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
+									<h2>random</h2>
+									<p>anything here</p>
 								</header>
 								<footer class="major">
 									<ul class="actions special">
@@ -217,51 +229,135 @@
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 		<script>
 			// code to draw graph
-			function formatData(dataArray) {
+			function formatgcData(dataArray) {
 			    console.log("data sent length: "+dataArray.length);
-			    var state = [];
-			    var population = [];
+			    var country = [];
+				var cumulative_cases = [];
+				var cumulative_deaths = [];
+				var new_cases = [];
+				var new_deaths = [];
 			    for(var i = 0; i < dataArray.length; i++) {
 			        // console.log(dataArray[i].state_name);
-			        state[i] = dataArray[i].state_name;
-			        population[i] = dataArray[i].pop_2015;
+			        country[i] = dataArray[i].country;
+					cumulative_cases[i] = dataArray[i].cumulative_cases;
+					cumulative_deaths[i] = dataArray[i].cumulative_deaths;
+					new_cases[i] = dataArray[i].new_cases;
+					new_deaths[i] = dataArray[i].new_deaths;
 			    }
 
-			    var jsonArray = [state, population];
+			    var jsonArray = [country, new_cases,cumulative_cases,new_deaths,cumulative_deaths];
+			    return jsonArray;
+			}
+			function formatgpData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+			    var country = [];
+				var pop_2020 = [];
+				var pop_2015 = [];
+
+			    for(var i = 0; i < dataArray.length; i++) {
+			        country[i] = dataArray[i].country_name;
+					pop_2020[i] = dataArray[i].pop_2020;
+					pop_2015[i] = dataArray[i].pop_2015;
+			    }
+
+			    var jsonArray = [country, pop_2020, pop_2015];
 			    return jsonArray;
 			}
 
 
-			$.post("http://localhost:8080/example_route", function(data) {
-				listdata = formatData(data);
-				var ctx = document.getElementById('clients').getContext('2d');
+			$.post("http://localhost:8080/global_covid", function(data) {
+				listdata = formatgcData(data);
+				var ctx = document.getElementById('global_covid').getContext('2d');
 				var chart = new Chart(ctx, {
 					// The type of chart we want to create
-					type: 'line',
+					type: 'bar',
 
 					// The data for our dataset
 					data: {
 						labels: listdata[0],
 						datasets: [{
-							label: 'My First dataset',
-							backgroundColor: 'rgb(255, 99, 132)',
-							borderColor: 'rgb(255, 99, 132)',
-							data: listdata[1]
+							label: 'Cumulative Cases',
+							backgroundColor: 'rgb(255, 0, 132)',
+							borderColor: 'rgb(255, 0, 132)',
+							data: listdata[2]
+						},{
+							label: 'Cumulative Deaths',
+							backgroundColor: 'rgb(0, 99, 132)',
+							borderColor: 'rgb(0, 99, 132)',
+							data: listdata[4]
 						}]
 					},
 
-					// Configuration options go here
-					options: {}
+					options: {
+						scales: {
+							yAxes: [{
+								scaleLabel: {
+									display: true,
+									labelString: 'Persons (log10)',
+								},
+								type: 'logarithmic'
+							}]
+						}
+					}
 				});
 			})
-				// var listnames = ;
-				// var arrayPop = [];
-				// arrayPop = ;
-				// var raw = ;
-				// console.log(listnames);
-				// console.log(arrayPop[0]);
-				// console.log(arrayPop[1]);
-		</script>
 
+			$.post("http://localhost:8080/global_population", function(data) {
+				listdata = formatgpData(data);
+				var ctx = document.getElementById('global_population').getContext('2d');
+				var chart = new Chart(ctx, {
+					// The type of chart we want to create
+					type: 'bar',
+
+					// The data for our dataset
+					data: {
+						labels: listdata[0],
+						datasets: [{
+							label: '2020',
+							backgroundColor: 'rgb(255, 0, 132)',
+							borderColor: 'rgb(255, 0, 132)',
+							data: listdata[1]
+						},
+						{
+							label: '2015',
+							backgroundColor: 'rgb(0, 0, 132)',
+							borderColor: 'rgb(0, 0, 132)',
+							data: listdata[2]
+						}]
+					},
+
+					options: {
+						scales: {
+							yAxes: [{
+								scaleLabel: {
+									display: true,
+									labelString: 'Persons (log10)',
+								},
+								type: 'logarithmic'
+							}]
+						}
+					}
+				});
+			})
+
+		</script>
+		<script>
+			var search_gc_country = document.querySelector("#search_gc_country");
+			search_gc_country.addEventListener("keyup", function (e) {
+				var span_items = document.querySelectorAll(".table_body ul li .item .gccountry span");
+				var gc_country = e.target.value.toLowerCase();
+
+				span_items.forEach(function (item) {
+					if (item.textContent.toLowerCase().indexOf(gc_country) != -1) {
+						item.closest("li").style.display = "block";
+						// console.log("true");
+					} else {
+						item.closest("li").style.display = "none";
+						// console.log("false");
+					}
+				});
+				console.log(gc_country);
+			});
+		</script>
 	</body>
 </html>
