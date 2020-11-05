@@ -33,15 +33,24 @@ app.listen(8080,()=>console.log('express server is running at port 8080'));
 app.get('/', function (req, res) {
     var listnames = ["Louise", "Sadie", "Erik", "Raph", "Gina"];
     // Render index page
-    res.render('pages/index', {
-        // EJS variable and server-side variable
-        listnames: listnames
+
+    mysqlConnection.query('SELECT gc.country, gc.new_cases, gc.cumulative_cases, gc.new_deaths, gc.cumulative_deaths FROM global_covid gc WHERE gc.date_reported = "2020-10-25" ORDER BY gc.country',(err,global_covid,fields)=>{
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        }else{
+            res.render('pages/index', {
+                // EJS variable and server-side variable
+                listnames: listnames,
+                global_covid: global_covid
+            });
+        }
     });
 });
 
-app.post('/example_route', function (req, res) {
+app.post('/global_covid', function (req, res) {
 
-    mysqlConnection.query('SELECT * FROM usa_population up',(err,rows,fields)=>{
+    mysqlConnection.query('SELECT gc.country, gc.new_cases, gc.cumulative_cases, gc.new_deaths, gc.cumulative_deaths FROM global_covid gc WHERE gc.date_reported = "2020-10-25" ORDER BY gc.cumulative_cases desc limit 30',(err,rows,fields)=>{
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;
@@ -50,3 +59,16 @@ app.post('/example_route', function (req, res) {
         }
     });
 })
+
+app.post('/global_population', function (req, res) {
+
+    mysqlConnection.query('SELECT gp.country_name, gp.pop_2020, gp.pop_2015 FROM global_population gp WHERE gp.country_type = "Country/Area" ORDER BY gp.pop_2020 desc limit 30',(err,rows,fields)=>{
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        }else{
+            res.send(rows);
+        }
+    });
+})
+
