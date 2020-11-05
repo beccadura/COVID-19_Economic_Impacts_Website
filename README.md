@@ -19,20 +19,10 @@ Go to Tab SQL and Run Query:
 ```SQL
 CREATE DATABASE sitepoint CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE sitepoint;
-
-CREATE TABLE authors (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  name varchar(50),
-  city varchar(50),
-  PRIMARY KEY (id)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
-INSERT INTO authors (id, name, city) VALUES
-(1, 'Michaela Lehr', 'Berlin'),
-(2, 'Michael Wanyoike', 'Nairobi'),
-(3, 'James Hibbard', 'Munich'),
-(4, 'Karolina Gawron', 'Wrocław');
 ```
+There are some datasets inside the sql folder.
+This is an sqldump file, you can just run it to add the dataset to your local mysql server.
+Make sure it goes to sitepoint database.
 
 5. Clone all these files to your local project folder
 
