@@ -39,80 +39,68 @@
 
 						<!-- Introduction -->
 						<section id="intro" class="main special">
-							<header class="major">
-								<h2>COVID-19 Global Cases</h2>
-							</header>
-							<ul class="features">
-								<li>Search by Country: <input type="text" id="search_gc_country" placeholder="Country name"> <br\></li>
-							</ul>
-							<div class="table_wrap">
-								<div class="table_header">
-									<ul>
-										<li>
-											<div class="item">
-												<div class="gccountry" style="height:inherit;">
-													<span>COUNTRY</span>
-												</div>
-												<div class="gcncases" style="height:inherit;">
-													<span>NEW CASES</span>
-												</div>
-												<div class="gcccases" style="height:inherit;">
-													<span>CUMULATIVE CASES</span>
-												</div>
-												<div class="gcndeaths" style="height:inherit;">
-													<span>NEW DEATHS</span>
-												</div>
-												<div class="gccdeaths" style="height:inherit;">
-													<span>CUMULATIVE DEATHS</span>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<div class="table_body">
-									<ul id="gcitem">
-									<% 
-										if(global_covid.length!=0){
-											global_covid.forEach(function(gc){ 
-									%>
-										<li style="display: block;">
-											<div class="item">
-												<div class="gccountry" style="height:inherit;">
-													<span><%=gc.country %></span>
-												</div>
-												<div class="gcncases" style="height:inherit;">
-													<span><%=gc.new_cases %></span>
-												</div>
-												<div class="gcccases" style="height:inherit;">
-													<span><%=gc.cumulative_cases %></span>
-												</div>
-												<div class="gcndeaths" style="height:inherit;">
-													<span><%=gc.new_deaths %></span>
-												</div>
-												<div class="gccdeaths" style="height:inherit;">
-													<span><%=gc.cumulative_deaths %></span>
-												</div>
-											</div>
-										</li>
-									<% 		}) %>
-									<% 	} else { %>
-										<li style="display: block;">
-											<div class="item">
-												<span>NO DATA FOUND</span>
-											</div>
-										</li>
-									<% 	} %>
-									</ul>
-								</div>
-								<div class="table_footer"></div>
-							</div>
-							<footer class="major">
-								<ul>
-									<li>in progress: sorting</li>
-									<li>Table last update: 2020-10-25</li>
-								</ul>
-							</footer>
-						</section>
+                            <header class="major">
+                                <h2>COVID-19 Global Cases</h2>
+                            </header>
+                            <ul class="features">
+                                <li>Search by Country: <input type="text" id="search_gc_country" placeholder="Country Name"> <br\></li>
+                            </ul>
+                            <div class="table_wrap">
+                                <div class="table_header">
+                                    <ul>
+                                        <li>
+                                            <div class="item">
+                                                <div class="gccountry" style="height:inherit;">
+                                                    <span>COUNTRY</span>
+                                                </div>
+                                                <div class="gcncases" style="height:inherit;">
+                                                    <span>TOTAL CASES</span>
+                                                </div>
+                                                <div class="gcccases" style="height:inherit;">
+                                                    <span>NEW CASES</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="table_body">
+                                    <ul id="gcitem">
+                                        <%
+                                        if(global_covid.length!=0){
+                                        global_covid.forEach(function(gc){
+                                        %>
+                                        <li style="display: block;">
+                                            <div class="item">
+                                                <div class="gccountry" style="height:inherit;">
+                                                    <span><%=gc.CountryName %></span>
+                                                </div>
+                                                <div class="gcncases" style="height:inherit;">
+                                                    <span><%=gc.TotalCases %></span>
+                                                </div>
+                                                <div class="gcccases" style="height:inherit;">
+                                                    <span><%=gc.NewCases %></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <% 		}) %>
+                                        <% 	} else { %>
+                                        <li style="display: block;">
+                                            <div class="item">
+                                                <span>NO DATA FOUND</span>
+                                            </div>
+                                        </li>
+                                        <% 	} %>
+                                    </ul>
+                                </div>
+                                <div class="table_footer"></div>
+                            </div>
+                            <footer class="major">
+                                <ul>
+                                    <li>in progress: sorting</li>
+                                    <li>Table last update: 2020-10-25</li>
+                                </ul>
+                            </footer>
+                        </section>
 
 						<!-- First Section -->
 						<section id="first" class="main">
