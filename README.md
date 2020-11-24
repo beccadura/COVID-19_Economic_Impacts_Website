@@ -19,20 +19,10 @@ Go to Tab SQL and Run Query:
 ```SQL
 CREATE DATABASE sitepoint CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE sitepoint;
-
-CREATE TABLE authors (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  name varchar(50),
-  city varchar(50),
-  PRIMARY KEY (id)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
-INSERT INTO authors (id, name, city) VALUES
-(1, 'Michaela Lehr', 'Berlin'),
-(2, 'Michael Wanyoike', 'Nairobi'),
-(3, 'James Hibbard', 'Munich'),
-(4, 'Karolina Gawron', 'Wrocław');
 ```
+There are some datasets inside the sql folder.
+This is an sqldump file, you can just run it to add the dataset to your local mysql server.
+Make sure it goes to sitepoint database.
 
 5. Clone all these files to your local project folder
 
@@ -41,24 +31,13 @@ Open Terminal and go to the project folder
 ```
 $ npm install
 ```
-### Optional Steps 7-9
-
-7. Try the /index.js website 
+7. start the template website (this uses server.js). remember, do step (3) Open XAMPP control panel and switch on the MySQL and Apache Server
 ```
-$ node index.js
+$ npm start
 ```
 output:
-express server is running at port 3000
+express server is running at port 8080
 DB connection successful!
 
-8. Try http://localhost:3000
-output:
-Cannot GET /
-
-9. Try http://localhost:3000/employees
-output:
-[{"id":1,"name":"Michaela Lehr","city":"Berlin"},{"id":2,"name":"Michael Wanyoike","city":"Nairobi"},{"id":3,"name":"James Hibbard","city":"Munich"},{"id":4,"name":"Karolina Gawron","city":"Wrocław"}]
-
-Optional: you can install JSON Formatter Chrome extension for better JSON viewing
-
-10. The templated COVID-19 website is /web/index.html
+8. Try http://localhost:8080
+if all goes well, should be the same with the screenshot
