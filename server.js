@@ -33,7 +33,7 @@ app.listen(8080,()=>console.log('express server is running at port 8080'));
 app.get('/', function (req, res) {
     // Render index page
 
-    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.NewCases FROM global_covid gc WHERE gc.Date = "2020-10-25" ORDER BY gc.CountryName',(err,global_covid,fields)=>{
+    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.NewCases, gc.TotalDeaths, gc.NewDeaths FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.CountryName',(err,global_covid,fields)=>{
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;
@@ -48,7 +48,7 @@ app.get('/', function (req, res) {
 
 app.post('/global_covid', function (req, res) {
 
-    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.NewCases FROM global_covid gc WHERE gc.Date = "2020-10-25" ORDER BY gc.CountryName desc limit 30',(err,rows,fields)=>{
+    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.TotalDeaths FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.TotalDeaths desc limit 30',(err,rows,fields)=>{
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;
@@ -60,7 +60,7 @@ app.post('/global_covid', function (req, res) {
 
 app.post('/global_population', function (req, res) {
 
-    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.NewCases FROM global_covid gc WHERE gc.Date = "2020-10-25" ORDER BY gc.CountryName desc limit 30',(err,rows,fields)=>{
+    mysqlConnection.query('SELECT cp.CountryName, cp.2019Population, cp.2020Population FROM country_population cp JOIN (SELECT gc.CountryCode FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.TotalDeaths desc LIMIT 30) a ON a.CountryCode = cp.CountryCode WHERE cp.2020Population IS NOT NULL',(err,rows,fields)=>{
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;
