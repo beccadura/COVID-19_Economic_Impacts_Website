@@ -54,10 +54,16 @@
                                                     <span>COUNTRY</span>
                                                 </div>
                                                 <div class="gcncases" style="height:inherit;">
-                                                    <span>TOTAL CASES</span>
+                                                    <span>NEW CASES</span>
                                                 </div>
                                                 <div class="gcccases" style="height:inherit;">
-                                                    <span>NEW CASES</span>
+                                                    <span>TOTAL CASES</span>
+												</div>
+												<div class="gcndeaths" style="height:inherit;">
+                                                    <span>NEW DEATHS</span>
+                                                </div>
+                                                <div class="gccdeaths" style="height:inherit;">
+                                                    <span>TOTAL DEATHS</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -75,10 +81,16 @@
                                                     <span><%=gc.CountryName %></span>
                                                 </div>
                                                 <div class="gcncases" style="height:inherit;">
-                                                    <span><%=gc.TotalCases %></span>
+                                                    <span><%=gc.NewCases %></span>
                                                 </div>
                                                 <div class="gcccases" style="height:inherit;">
-                                                    <span><%=gc.NewCases %></span>
+                                                    <span><%=gc.TotalCases %></span>
+												</div>
+												<div class="gcndeaths" style="height:inherit;">
+                                                    <span><%=gc.NewDeaths %></span>
+												</div>
+												<div class="gccdeaths" style="height:inherit;">
+                                                    <span><%=gc.TotalDeaths %></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -97,7 +109,7 @@
                             <footer class="major">
                                 <ul>
                                     <li>in progress: sorting</li>
-                                    <li>Table last update: 2020-10-25</li>
+                                    <li>Table last update: 2020-11-18</li>
                                 </ul>
                             </footer>
                         </section>
@@ -222,33 +234,35 @@
 			    var country = [];
 				var cumulative_cases = [];
 				var cumulative_deaths = [];
-				var new_cases = [];
-				var new_deaths = [];
+				// var new_cases = [];
+				// var new_deaths = [];
 			    for(var i = 0; i < dataArray.length; i++) {
 			        // console.log(dataArray[i].state_name);
-			        country[i] = dataArray[i].country;
-					cumulative_cases[i] = dataArray[i].cumulative_cases;
-					cumulative_deaths[i] = dataArray[i].cumulative_deaths;
-					new_cases[i] = dataArray[i].new_cases;
-					new_deaths[i] = dataArray[i].new_deaths;
+			        country[i] = dataArray[i].CountryName;
+					cumulative_cases[i] = dataArray[i].TotalCases;
+					cumulative_deaths[i] = dataArray[i].TotalDeaths;
+					// new_cases[i] = dataArray[i].new_cases;
+					// new_deaths[i] = dataArray[i].new_deaths;
 			    }
 
-			    var jsonArray = [country, new_cases,cumulative_cases,new_deaths,cumulative_deaths];
+				var jsonArray = [country, cumulative_cases,cumulative_deaths
+									// ,new_cases,new_deaths
+								];
 			    return jsonArray;
 			}
 			function formatgpData(dataArray) {
 			    console.log("data sent length: "+dataArray.length);
 			    var country = [];
 				var pop_2020 = [];
-				var pop_2015 = [];
+				var pop_2019 = [];
 
 			    for(var i = 0; i < dataArray.length; i++) {
-			        country[i] = dataArray[i].country_name;
-					pop_2020[i] = dataArray[i].pop_2020;
-					pop_2015[i] = dataArray[i].pop_2015;
+			        country[i] = dataArray[i].CountryName;
+					pop_2020[i] = dataArray[i]["2020Population"];
+					pop_2019[i] = dataArray[i]["2019Population"];
 			    }
 
-			    var jsonArray = [country, pop_2020, pop_2015];
+			    var jsonArray = [country, pop_2020, pop_2019];
 			    return jsonArray;
 			}
 
@@ -267,12 +281,12 @@
 							label: 'Cumulative Cases',
 							backgroundColor: 'rgb(255, 0, 132)',
 							borderColor: 'rgb(255, 0, 132)',
-							data: listdata[2]
+							data: listdata[1]
 						},{
 							label: 'Cumulative Deaths',
 							backgroundColor: 'rgb(0, 99, 132)',
 							borderColor: 'rgb(0, 99, 132)',
-							data: listdata[4]
+							data: listdata[2]
 						}]
 					},
 
@@ -307,7 +321,7 @@
 							data: listdata[1]
 						},
 						{
-							label: '2015',
+							label: '2019',
 							backgroundColor: 'rgb(0, 0, 132)',
 							borderColor: 'rgb(0, 0, 132)',
 							data: listdata[2]
