@@ -6,8 +6,11 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/svgMap.css" />
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/svgMap.js"></script>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<link rel="shortcut icon" href="images/favicon.ico"/>
+		<link rel="shortcut icon" href="assets/img/favicon.ico"/>
 	</head>
 	<body class="is-preload">
 
@@ -16,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<span class="logo"><img src="images/logo.svg" alt="" /></span>
+						<span class="logo"><img src="assets/img/logo.svg" alt="" /></span>
 						<h1>COVID-19 Informational Website</h1>
 						<p>CSCI5707 Team 9 Project<br />
 						Ave Bisesi, Becca Dura, Samuel Johnson, Hezkiel Nanda</p>
@@ -27,8 +30,8 @@
 						<ul>
 							<li><a href="#intro" class="active">Global Cases</a></li>
 							<li><a href="#first">Top Cases</a></li>
-							<li><a href="#second">Second Section</a></li>
-							<li><a href="#third">Third Section</a></li>
+							<li><a href="#second">Population</a></li>
+							<li><a href="#third">World Map</a></li>
 							<li><a href="#fourth">Fourth Section</a></li>
 							<li><a href="#cta">Get Started</a></li>
 						</ul>
@@ -40,7 +43,8 @@
 						<!-- Introduction -->
 						<section id="intro" class="main special">
                             <header class="major">
-                                <h2>COVID-19 Global Cases</h2>
+								<h2>COVID-19 Global Cases</h2>
+								<h4>Last Updated: 2020-11-18</h4>
                             </header>
                             <ul class="features">
                                 <li>Search by Country: <input type="text" id="search_gc_country" placeholder="Country Name"> <br\></li>
@@ -106,26 +110,14 @@
                                 </div>
                                 <div class="table_footer"></div>
                             </div>
-                            <footer class="major">
-                                <ul>
-                                    <li>in progress: sorting</li>
-                                    <li>Table last update: 2020-11-18</li>
-                                </ul>
-                            </footer>
                         </section>
 
 						<!-- First Section -->
 						<section id="first" class="main">
 							<header class="major">
-								<h2>Top Cases</h2>
+								<h2>Top 30 Global Cases</h2>
 							</header>
 							<canvas id="global_covid" width=500 height=400></canvas>
-							<footer class="major">
-								<ul>
-									<li>in progress: search country</li>
-									<li> checkboxes for dataset to display</li>
-								</ul>
-							</footer>
 						</section>
 
 						<!-- Second Section -->
@@ -133,29 +125,39 @@
 							<div class="spotlight">
 								<div class="content">
 									<header class="major">
-										<h2>Population</h2>
+										<h2>Population of Top 30 Global Cases</h2>
 									</header>
 								</div>
 							</div>
 							<canvas id="global_population" width=500 height=400></canvas>
-							<footer class="major">
-								<ul>
-									<li>in progress: search country </li>
-									<li>checkbox for dataset to display</li>
-								</ul>
-							</footer>
 						</section>
 
 						<!-- Third Section -->
 							<section id="third" class="main">
 								<header class="major">
-									<h2>Economic data</h2>
+									<h2>World Map Data</h2>
+									<h4>Last Updated: 2020-11-18</h4>
 								</header>
+								<div id="svgMapGPD"></div>
+								<script src="assets/js/gdp.js"></script>
+								<script src="assets/js/countriesEN.js"></script>
+								<script>
+									setTimeout(() => {  
+										new svgMap({
+											targetElementID: 'svgMapGPD',
+											data: svgMapDataGPD,
+											colorMin: '#FFF0F9',
+											colorMax: '#730B62'
+										});
+									}, 1000);
+								</script>
 								<footer class="major">
 									<ul>
-										<li>in progress: dataset </li>
-										<li>checkbox for dataset column to display</li>
-									</p>
+										<li>Elapsed Query Time: <a id="worldmaptime"></a></li>
+										<script>setTimeout(() => {  
+											document.getElementById("worldmaptime").innerHTML = timeelapsed + " nanoseconds";
+										}, 1000);</script>
+									</ul>
 								</footer>
 							</section>
 
@@ -219,7 +221,6 @@
 			</div>
 
 		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/jquery.scrollex.min.js"></script>
 		<script src="assets/js/jquery.scrolly.min.js"></script>
 		<script src="assets/js/browser.min.js"></script>
