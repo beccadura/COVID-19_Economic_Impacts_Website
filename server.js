@@ -11,7 +11,7 @@ app.use(bodyparser.json());
 var mysqlConnection = mysql.createConnection({
 	host:'localhost',
 	user:'root',
-	database:'sitepoint'
+	database:'covid_economic_impacts'
 });
 
 mysqlConnection.connect((err)=>{
@@ -22,7 +22,7 @@ mysqlConnection.connect((err)=>{
 });
 
 // Render static files
-app.use(express.static('web'));
+app.use(express.static('views'));
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
 // Port website will run on
@@ -31,17 +31,15 @@ app.listen(8080,()=>console.log('express server is running at port 8080'));
 // *** GET Routes - display pages ***
 // Route Route
 app.get('/', function (req, res) {
-    var listnames = ["Louise", "Sadie", "Erik", "Raph", "Gina"];
     // Render index page
 
-    mysqlConnection.query('SELECT gc.country, gc.new_cases, gc.cumulative_cases, gc.new_deaths, gc.cumulative_deaths FROM global_covid gc WHERE gc.date_reported = "2020-10-25" ORDER BY gc.country',(err,global_covid,fields)=>{
+    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.NewCases, gc.TotalDeaths, gc.NewDeaths FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.CountryName',(err,global_covid,fields)=>{
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;
         }else{
             res.render('pages/index', {
                 // EJS variable and server-side variable
-                listnames: listnames,
                 global_covid: global_covid
             });
         }
@@ -50,7 +48,7 @@ app.get('/', function (req, res) {
 
 app.post('/global_covid', function (req, res) {
 
-    mysqlConnection.query('SELECT gc.country, gc.new_cases, gc.cumulative_cases, gc.new_deaths, gc.cumulative_deaths FROM global_covid gc WHERE gc.date_reported = "2020-10-25" ORDER BY gc.cumulative_cases desc limit 30',(err,rows,fields)=>{
+    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.TotalDeaths FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.TotalDeaths desc limit 30',(err,rows,fields)=>{
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;
@@ -62,7 +60,7 @@ app.post('/global_covid', function (req, res) {
 
 app.post('/global_population', function (req, res) {
 
-    mysqlConnection.query('SELECT gp.country_name, gp.pop_2020, gp.pop_2015 FROM global_population gp WHERE gp.country_type = "Country/Area" ORDER BY gp.pop_2020 desc limit 30',(err,rows,fields)=>{
+    mysqlConnection.query('SELECT cp.CountryName, cp.2019Population, cp.2020Population FROM country_population cp JOIN (SELECT gc.CountryCode FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.TotalDeaths desc LIMIT 30) a ON a.CountryCode = cp.CountryCode WHERE cp.2020Population IS NOT NULL',(err,rows,fields)=>{
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;
@@ -70,5 +68,46 @@ app.post('/global_population', function (req, res) {
             res.send(rows);
         }
     });
+})
+
+app.post('/worldmap', function (req, res) {
+    const NS_PER_SEC = 1e9;
+    const time = process.hrtime();
+    mysqlConnection.query(`select
+                                cp.CountryCode_iso2 as CountryCode,
+                                gc.TotalCases,
+                                gc.TotalDeaths,
+                                gc.MedianAge,
+                                cp.pop_2019,
+                                cp.pop_2020
+                            from
+                                global_covid gc
+                            join (
+                                select
+                                    c1.CountryCode_iso2,
+                                    cp1.2019Population as pop_2019,
+                                    cp1.2020Population as pop_2020,
+                                    cp1.CountryCode
+                                from
+                                    country_population cp1
+                                join countries c1 on
+                                    c1.CountryCode_iso3 = cp1.CountryCode )cp on
+                                cp.CountryCode = gc.CountryCode
+                            where
+                                gc.Date = '2020-11-18'`,(err,rows,fields)=>{
+            if (err) {
+                console.error('error connecting: ' + err.stack);
+                return;
+            }else{
+                const diff = process.hrtime(time);
+                console.log(`Benchmark took ${diff[0] * NS_PER_SEC + diff[1]} seconds`);
+                res.send({
+                    data: rows,
+                    elapsed: diff[0] * NS_PER_SEC + diff[1]
+                });
+            }
+        });
+
+   
 })
 
