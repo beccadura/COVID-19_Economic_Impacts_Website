@@ -70,3 +70,44 @@ app.post('/global_population', function (req, res) {
     });
 })
 
+app.post('/worldmap', function (req, res) {
+    const NS_PER_SEC = 1e9;
+    const time = process.hrtime();
+    mysqlConnection.query(`select
+                                cp.CountryCode_iso2 as CountryCode,
+                                gc.TotalCases,
+                                gc.TotalDeaths,
+                                gc.MedianAge,
+                                cp.pop_2019,
+                                cp.pop_2020
+                            from
+                                global_covid gc
+                            join (
+                                select
+                                    c1.CountryCode_iso2,
+                                    cp1.2019Population as pop_2019,
+                                    cp1.2020Population as pop_2020,
+                                    cp1.CountryCode
+                                from
+                                    country_population cp1
+                                join countries c1 on
+                                    c1.CountryCode_iso3 = cp1.CountryCode )cp on
+                                cp.CountryCode = gc.CountryCode
+                            where
+                                gc.Date = '2020-11-18'`,(err,rows,fields)=>{
+            if (err) {
+                console.error('error connecting: ' + err.stack);
+                return;
+            }else{
+                const diff = process.hrtime(time);
+                console.log(`Benchmark took ${diff[0] * NS_PER_SEC + diff[1]} seconds`);
+                res.send({
+                    data: rows,
+                    elapsed: diff[0] * NS_PER_SEC + diff[1]
+                });
+            }
+        });
+
+   
+})
+
