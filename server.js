@@ -101,7 +101,7 @@ app.post('/country_population', function (req, res) {
 
 app.post('/country_imports', function (req, res) {
 
-    mysqlConnection.query('SELECT ci.Commodity, ci.2019Jan, ci.2019Feb, ci.2019Mar, ci.2019Apr, ci.2019May, ci.2019Jun, ci.2019Jul, ci.2019Aug, ci.2019Sep, ci.2019Oct, ci.2019Nov, ci.2019Dec, ci.2020Jan, ci.2020Feb, ci.2020Mar, ci.2020Apr, ci.2020May, ci.2020Jun, ci.2020Jul, ci.2020Aug, ci.2020Sep FROM country_imports ci WHERE (ci.Commodity LIKE "0 % " OR ci.Commodity LIKE "1 % " OR ci.Commodity LIKE "2 % " OR ci.Commodity LIKE "3 % " OR ci.Commodity LIKE "4 % " OR ci.Commodity LIKE "5 % " OR ci.Commodity LIKE "6 % " OR ci.Commodity LIKE "7 % " OR ci.Commodity LIKE "8 % " OR ci.Commodity LIKE "9 % ") AND ci.CountryCode = "US"', (err, rows, fields) => {
+    mysqlConnection.query("SELECT ci.Commodity, ci.2019Jan, ci.2019Feb, ci.2019Mar, ci.2019Apr, ci.2019May, ci.2019Jun, ci.2019Jul, ci.2019Aug, ci.2019Sep, ci.2019Oct, ci.2019Nov, ci.2019Dec, ci.2020Jan, ci.2020Feb, ci.2020Mar, ci.2020Apr, ci.2020May, ci.2020Jun, ci.2020Jul, ci.2020Aug, ci.2020Sep FROM country_imports ci WHERE(ci.Commodity LIKE '0 %' OR ci.Commodity LIKE '1 %'  OR ci.Commodity LIKE '2 %' OR ci.Commodity LIKE '3 %' OR ci.Commodity LIKE '4 %' OR ci.Commodity LIKE '5 %' OR ci.Commodity LIKE '6 %' OR ci.Commodity LIKE '7 %' OR ci.Commodity LIKE '8 %' OR ci.Commodity LIKE '9 %') AND ci.CountryCode = 'US'", (err, rows, fields) => {
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;

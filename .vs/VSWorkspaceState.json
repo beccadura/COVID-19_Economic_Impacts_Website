@@ -2,6 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\views",
+    "\\views\\assets",
     "\\views\\pages"
   ],
   "SelectedNode": "\\server.js",

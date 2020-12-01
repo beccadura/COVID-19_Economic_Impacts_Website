@@ -346,6 +346,7 @@
 				var jsonArray = [StateName, TotalDeaths, TotalICU, TotalHospitalized, TotalNegative, Positive, TotalOnVentilator, Recovered, TotalTests];
 				return jsonArray;
 			}
+
 			function formatcpData(dataArray) {
 				console.log("data sent length: "+dataArray.length);
 				var country = [];
@@ -362,7 +363,58 @@
 				return jsonArray;
 			}
 
-			
+			function formatciData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+			    var Commodity = []; 
+				var c2019Jan = [];
+				var c2019Feb = [];
+				var c2019Mar = [];
+				var c2019Apr = [];
+				var c2019May = [];
+				var c2019Jun = [];
+				var c2019Jul = [];
+				var c2019Aug = [];
+				var c2019Sep = [];
+				var c2019Oct = [];
+				var c2019Nov = [];
+				var c2019Dec = [];
+				var c2020Jan = [];
+				var c2020Feb = [];
+				var c2020Mar = [];
+				var c2020Apr = [];
+				var c2020May = [];
+				var c2020Jun = [];
+				var c2020Jul = [];
+				var c2020Aug = [];
+				var c2020Sep = [];
+			    for(var i = 0; i < dataArray.length; i++) {
+			        Commodity[i] = dataArray[i].Commodity;
+					c2019Jan[i] = dataArray[i]["2019Jan"];
+					c2019Feb[i] = dataArray[i]["2019Feb"];
+					c2019Mar[i] = dataArray[i]["2019Mar"];
+					c2019Apr[i] = dataArray[i]["2019Apr"];
+					c2019May[i] = dataArray[i]["2019May"];
+					c2019Jun[i] = dataArray[i]["2019Jun"];
+					c2019Jul[i] = dataArray[i]["2019Jul"];
+					c2019Aug[i] = dataArray[i]["2019Aug"];
+					c2019Sep[i] = dataArray[i]["2019Sep"];
+					c2019Oct[i] = dataArray[i]["2019Oct"];
+					c2019Nov[i] = dataArray[i]["2019Nov"];
+					c2019Dec[i] = dataArray[i]["2019Dec"];
+					c2020Jan[i] = dataArray[i]["2020Jan"];
+					c2020Feb[i] = dataArray[i]["2020Feb"];
+					c2020Mar[i] = dataArray[i]["2020Mar"];
+					c2020Apr[i] = dataArray[i]["2020Apr"];
+					c2020May[i] = dataArray[i]["2020May"];
+					c2020Jun[i] = dataArray[i]["2020Jun"];
+					c2020Jul[i] = dataArray[i]["2020Jul"];
+					c2020Aug[i] = dataArray[i]["2020Aug"];
+					c2020Sep[i] = dataArray[i]["2020Sep"];
+			    }
+
+				var jsonArray = [Commodity, c2019Jan, c2019Feb, c2019Mar, c2019Apr, c2019May, c2019Jun, c2019Jul, c2019Aug, c2019Sep, c2019Oct, c2019Nov, c2019Dec, c2020Jan, c2020Feb, c2020Mar, c2020Apr, c2020May, c2020Jun, c2020Jul, c2020Aug, c2020Sep];
+			    return jsonArray;
+			}
 	
 	
 			$.post("http://localhost:8080/state_covid", function(data) {
@@ -393,7 +445,7 @@
 									yAxes: [{
 										scaleLabel: {
 											display: true,
-											labelString: 'Persons (log10)',
+											labelString: 'Count (log10 scale)',
 										},
 										type: 'logarithmic'
 									}]
@@ -431,7 +483,7 @@
 					yAxes: [{
 						scaleLabel: {
 						display: true,
-						labelString: 'Persons (log10)',
+						labelString: 'Population (log10 Scale)',
 						},
 						type: 'logarithmic'
 					}]
@@ -440,67 +492,7 @@
 				});
 			})
 
-			
-	
-      </script>
-
-
-	  <script>
-	  function formatciData(dataArray) {
-			    console.log("data sent length: "+dataArray.length);
-			    var Commodity = []; 
-				var 2019Jan = [];
-				var 2019Feb = [];
-				var 2019Mar = [];
-				var 2019Apr = [];
-				var 2019May = [];
-				var 2019Jun = [];
-				var 2019Jul = [];
-				var 2019Aug = [];
-				var 2019Sep = [];
-				var 2019Oct = [];
-				var 2019Nov = [];
-				var 2019Dec = [];
-				var 2020Jan = [];
-				var 2020Feb = [];
-				var 2020Mar = [];
-				var 2020Apr = [];
-				var 2020May = [];
-				var 2020Jun = [];
-				var 2020Jul = [];
-				var 2020Aug = [];
-				var 2020Sep = [];
-			    for(var i = 0; i < dataArray.length; i++) {
-			        Commodity[i] = dataArray[i].Commodity;
-					2019Jan[i] = dataArray[i].2019Jan;
-					2019Feb[i] = dataArray[i].2019Feb;
-					2019Mar[i] = dataArray[i].2019Mar;
-					2019Apr[i] = dataArray[i].2019Apr;
-					2019May[i] = dataArray[i].2019May;
-					2019Jun[i] = dataArray[i].2019Jun;
-					2019Jul[i] = dataArray[i].2019Jul;
-					2019Aug[i] = dataArray[i].2019Aug;
-					2019Sep[i] = dataArray[i].2019Sep;
-					2019Oct[i] = dataArray[i].2019Oct;
-					2019Nov[i] = dataArray[i].2019Nov;
-					2019Dec[i] = dataArray[i].2019Dec;
-					2020Jan[i] = dataArray[i].2020Jan;
-					2020Feb[i] = dataArray[i].2020Feb;
-					2020Mar[i] = dataArray[i].2020Mar;
-					2020Apr[i] = dataArray[i].2020Apr;
-					2020May[i] = dataArray[i].2020May;
-					2020Jun[i] = dataArray[i].2020Jun;
-					2020Jul[i] = dataArray[i].2020Jul;
-					2020Aug[i] = dataArray[i].2020Aug;
-					2020Sep[i] = dataArray[i].2020Sep;
-			    }
-
-				var jsonArray = [Commodity, 2019Jan, 2019Feb, 2019Mar, 2019Apr, 2019May, 2019Jun, 2019Jul, 2019Aug, 2019Sep, 2019Oct, 2019Nov, 2019Dec, 2020Jan, 2020Feb, 2020Mar, 2020Apr, 2020May, 2020Jun, 2020Jul, 2020Aug, 2020Sep];
-			    return jsonArray;
-			}
-
-
-	  $.post("http://localhost:8080/country_imports", function(data) {
+			$.post("http://localhost:8080/country_imports", function(data) {
 				listdata = formatciData(data);
 				var ctx = document.getElementById('country_imports').getContext('2d');
 				var chart = new Chart(ctx, {
@@ -511,32 +503,75 @@
 					data: {
 						labels: ['2019Jan', '2019Feb', '2019Mar', '2019Apr', '2019May', '2019Jun', '2019Jul', '2019Aug', '2019Sep', '2019Oct', '2019Nov', '2019Dec', '2020Jan', '2020Feb', '2020Mar', '2020Apr', '2020May', '2020Jun', '2020Jul', '2020Aug', '2020Sep'],
 						datasets: [{ 
-						data: [listdata[0][0], listdata[1][0], listdata[2][0], listdata[3][0], listdata[4][0], listdata[5][0], listdata[6][0], listdata[7][0], listdata[8][0], listdata[9][0]],
-						label: "0",
+						data: [listdata[1][0], listdata[2][0], listdata[3][0], listdata[4][0], listdata[5][0], listdata[6][0], listdata[7][0], listdata[8][0], listdata[9][0], listdata[10][0], listdata[11][0], listdata[12][0], listdata[13][0], listdata[14][0], listdata[15][0], listdata[16][0], listdata[17][0], listdata[18][0], listdata[19][0], listdata[20][0], listdata[21][0]],
+						label: listdata[0][0],
 						borderColor: "#3e95cd",
 						fill: false
 					  },{ 
-						data: [listdata[0][1], listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1], listdata[8][1], listdata[9][1]],
-						label: "1",
-						borderColor: "#3e95cd",
+						data: [listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1], listdata[8][1], listdata[9][1], listdata[10][1], listdata[11][1], listdata[12][1], listdata[13][1], listdata[14][1], listdata[15][1], listdata[16][1], listdata[17][1], listdata[18][1], listdata[19][1], listdata[20][1], listdata[21][1]],
+						label: listdata[0][1],
+						borderColor: "#ff5733",
+						fill: false
+					  },{ 
+						data: [listdata[1][2], listdata[2][2], listdata[3][2], listdata[4][2], listdata[5][2], listdata[6][2], listdata[7][2], listdata[8][2], listdata[9][2], listdata[10][2], listdata[11][2], listdata[12][2], listdata[13][2], listdata[14][2], listdata[15][2], listdata[16][2], listdata[17][2], listdata[18][2], listdata[19][2], listdata[20][2], listdata[21][2]],
+						label: listdata[0][2],
+						borderColor: "#ffe933",
+						fill: false
+					  },{ 
+						data: [listdata[1][3], listdata[2][3], listdata[3][3], listdata[4][3], listdata[5][3], listdata[6][3], listdata[7][3], listdata[8][3], listdata[9][3], listdata[10][3], listdata[11][3], listdata[12][3], listdata[13][3], listdata[14][3], listdata[15][3], listdata[16][3], listdata[17][3], listdata[18][3], listdata[19][3], listdata[20][3], listdata[21][3]],
+						label: listdata[0][3],
+						borderColor: "#53ff33",
+						fill: false
+					  },{ 
+						data: [listdata[1][4], listdata[2][4], listdata[3][4], listdata[4][4], listdata[5][4], listdata[6][4], listdata[7][4], listdata[8][4], listdata[9][4], listdata[10][4], listdata[11][4], listdata[12][4], listdata[13][4], listdata[14][4], listdata[15][4], listdata[16][4], listdata[17][4], listdata[18][4], listdata[19][4], listdata[20][4], listdata[21][4]],
+						label: listdata[0][4],
+						borderColor: "#ff333c",
+						fill: false
+					  },{ 
+						data: [listdata[1][5], listdata[2][5], listdata[3][5], listdata[4][5], listdata[5][5], listdata[6][5], listdata[7][5], listdata[8][5], listdata[9][5], listdata[10][5], listdata[11][5], listdata[12][5], listdata[13][5], listdata[14][5], listdata[15][5], listdata[16][5], listdata[17][5], listdata[18][5], listdata[19][5], listdata[20][5], listdata[21][5]],
+						label: listdata[0][5],
+						borderColor: "#33fdff",
+						fill: false
+					  },{ 
+						data: [listdata[1][6], listdata[2][6], listdata[3][6], listdata[4][6], listdata[5][6], listdata[6][6], listdata[7][6], listdata[8][6], listdata[9][6], listdata[10][6], listdata[11][6], listdata[12][6], listdata[13][6], listdata[14][6], listdata[15][6], listdata[16][6], listdata[17][6], listdata[18][6], listdata[19][6], listdata[20][6], listdata[21][6]],
+						label: listdata[0][6],
+						borderColor: "#de33ff",
+						fill: false
+					  },{ 
+						data: [listdata[1][7], listdata[2][7], listdata[3][7], listdata[4][7], listdata[5][7], listdata[6][7], listdata[7][7], listdata[8][7], listdata[9][7], listdata[10][7], listdata[11][7], listdata[12][7], listdata[13][7], listdata[14][7], listdata[15][7], listdata[16][7], listdata[17][7], listdata[18][7], listdata[19][7], listdata[20][7], listdata[21][7]],
+						label: listdata[0][7],
+						borderColor: "#ff33cd",
+						fill: false
+					  },{ 
+						data: [listdata[1][8], listdata[2][8], listdata[3][8], listdata[4][8], listdata[5][8], listdata[6][8], listdata[7][8], listdata[8][8], listdata[9][8], listdata[10][8], listdata[11][8], listdata[12][8], listdata[13][8], listdata[14][8], listdata[15][8], listdata[16][8], listdata[17][8], listdata[18][8], listdata[19][8], listdata[20][8], listdata[21][8]],
+						label: listdata[0][8],
+						borderColor: "#8a8789",
+						fill: false
+					  },{ 
+						data: [listdata[1][9], listdata[2][9], listdata[3][9], listdata[4][9], listdata[5][9], listdata[6][9], listdata[7][9], listdata[8][9], listdata[9][9], listdata[10][9], listdata[11][9], listdata[12][9], listdata[13][9], listdata[14][9], listdata[15][9], listdata[16][9], listdata[17][9], listdata[18][9], listdata[19][9], listdata[20][9], listdata[21][9]],
+						label: listdata[0][9],
+						borderColor: "#047238",
 						fill: false
 					  }]
 					},
-
-					options: {
-						scales: {
-							yAxes: [{
-								scaleLabel: {
-									display: true,
-									labelString: 'Number (log10)',
-								},
-								type: 'logarithmic'
-							}]
+		
+				options: {
+					scales: {
+					yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'Amount',
 						}
+					}]
 					}
+				}
 				});
 			})
-	  </script>
+
+      </script>
+
+
+	  
 
 
 
