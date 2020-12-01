@@ -87,9 +87,11 @@ app.post('/state_covid', function (req, res) {
     });
 })
 
-app.post('/country_population', function (req, res) {
 
-    mysqlConnection.query('SELECT cp.CountryName, cp.2019Population, cp.2020Population FROM country_population cp JOIN (SELECT gc.CountryCode FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.TotalDeaths desc LIMIT 30) a ON a.CountryCode = cp.CountryCode WHERE cp.2020Population IS NOT NULL ORDER BY cp.2020Population DESC LIMIT 25', (err, rows, fields) => {
+
+app.post('/country_imports', function (req, res) {
+
+    mysqlConnection.query("SELECT ci.Commodity, ci.2019Jan, ci.2019Feb, ci.2019Mar, ci.2019Apr, ci.2019May, ci.2019Jun, ci.2019Jul, ci.2019Aug, ci.2019Sep, ci.2019Oct, ci.2019Nov, ci.2019Dec, ci.2020Jan, ci.2020Feb, ci.2020Mar, ci.2020Apr, ci.2020May, ci.2020Jun, ci.2020Jul, ci.2020Aug, ci.2020Sep FROM country_imports ci WHERE(ci.Commodity LIKE '0 %' OR ci.Commodity LIKE '1 %'  OR ci.Commodity LIKE '2 %' OR ci.Commodity LIKE '3 %' OR ci.Commodity LIKE '4 %' OR ci.Commodity LIKE '5 %' OR ci.Commodity LIKE '6 %' OR ci.Commodity LIKE '7 %' OR ci.Commodity LIKE '8 %' OR ci.Commodity LIKE '9 %') AND ci.CountryCode = 'US'", (err, rows, fields) => {
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;
@@ -99,9 +101,21 @@ app.post('/country_population', function (req, res) {
     });
 })
 
-app.post('/country_imports', function (req, res) {
+app.post('/national_gdp', function (req, res) {
 
-    mysqlConnection.query("SELECT ci.Commodity, ci.2019Jan, ci.2019Feb, ci.2019Mar, ci.2019Apr, ci.2019May, ci.2019Jun, ci.2019Jul, ci.2019Aug, ci.2019Sep, ci.2019Oct, ci.2019Nov, ci.2019Dec, ci.2020Jan, ci.2020Feb, ci.2020Mar, ci.2020Apr, ci.2020May, ci.2020Jun, ci.2020Jul, ci.2020Aug, ci.2020Sep FROM country_imports ci WHERE(ci.Commodity LIKE '0 %' OR ci.Commodity LIKE '1 %'  OR ci.Commodity LIKE '2 %' OR ci.Commodity LIKE '3 %' OR ci.Commodity LIKE '4 %' OR ci.Commodity LIKE '5 %' OR ci.Commodity LIKE '6 %' OR ci.Commodity LIKE '7 %' OR ci.Commodity LIKE '8 %' OR ci.Commodity LIKE '9 %') AND ci.CountryCode = 'US'", (err, rows, fields) => {
+    mysqlConnection.query('SELECT ng.Q1_2019, ng.Q2_2019, ng.Q3_2019, ng.Q4_2019, ng.Q1_2020, ng.Q2_2020, ng.Q3_2020 FROM national_gdp ng WHERE ng.Category = "Gross domestic product"', (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            res.send(rows);
+        }
+    });
+})
+
+app.post('/national_impexp', function (req, res) {
+
+    mysqlConnection.query('SELECT ng.SubCategory1, ng.Q1_2019, ng.Q2_2019, ng.Q3_2019, ng.Q4_2019, ng.Q1_2020, ng.Q2_2020, ng.Q3_2020 FROM national_gdp ng WHERE ng.Category = "Net exports of goods and services" AND (ng.SubCategory1 = "Exports" OR ng.SubCategory1 = "Imports") AND (ng.SubCategory2 = "Overall")', (err, rows, fields) => {
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;

@@ -28,12 +28,12 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="#intro" class="active">State Cases</a></li>
-							<li><a href="#first">State Positive Cases & Deaths</a></li>
-							<li><a href="#second">Country Populations</a></li>
-							<li><a href="#third">Country Imports</a></li>
-							<li><a href="#fourth">Fourth Section</a></li>
-							<li><a href="#cta">Get Started</a></li>
+							<li><a href="#intro" class="active">Global COVID</a></li>
+							<li><a href="#first">State COVID</a></li>
+							<li><a href="#second">GDP</a></li>
+							<li><a href="#third">Import and Exports</a></li>
+							<li><a href="#fourth">Unemployment Rates</a></li>
+							<li><a href="#cta">Data Sources</a></li>
 						</ul>
 					</nav>
 
@@ -42,8 +42,41 @@
 
 						<!-- Introduction -->
 						<section id="intro" class="main special">
-                            <header class="major">
-                                <h2>COVID-19 State Cases</h2>
+
+							<header class="major">
+								<h2>World Map COVID-19 Data</h2>
+								<h4>Last Updated: 2020-11-18</h4>
+							</header>
+							<div id="svgMapGPD"></div>
+							<script src="assets/js/gdp.js"></script>
+							<script src="assets/js/countriesEN.js"></script>
+							<script>
+							setTimeout(() => {  
+							new svgMap({
+								targetElementID: 'svgMapGPD',
+								data: svgMapDataGPD,
+								colorMin: '#FFF0F9',
+								colorMax: '#730B62'
+							});
+							}, 1000);
+							</script>
+							<footer class="major">
+							<ul>
+								<li>Elapsed Query Time: <a id="worldmaptime"></a></li>
+								<script>setTimeout(() => {  
+						document.getElementById("worldmaptime").innerHTML = timeelapsed + " nanoseconds";
+					}, 1000);</script>
+							</ul>
+							</footer>
+
+                            
+                        </section>
+
+						<!-- First Section -->
+						<section id="first" class="main special">
+
+							<header class="major">
+                                <h2>US State COVID-19 Data</h2>
                             </header>
                             <ul class="features">
                                 <li>Search by State: <input type="text" id="search_sc_state" placeholder="State Name"> <br\></li>
@@ -132,12 +165,9 @@
                                     <li>Table Showing Data From: 11-18-2020</li>
                                 </ul>
                             </footer>
-                        </section>
 
-						<!-- First Section -->
-						<section id="first" class="main special">
 							<header class="major">
-								<h2>States with Most Covid Cases</h2>
+								<h2>US States with Most Covid Cases</h2>
 							</header>
 							<div class="chart-container" style="position: relative;">
 								<canvas id="state_covid" width=500 height=400>
@@ -146,20 +176,26 @@
 
 						<!-- Second Section -->
 						<section id="second" class="main special">
-						<div>
 							<header class="major">
-								<h2>Country Populations</h2>
+									<h2>US National GDP</h2>
 							</header>
 							<div class="chart-container" style="position: relative;">
-								<canvas id="country_population" width=500 height=400>
+								<canvas id="national_gdp" width=500 height=400>
 							</div>
-						</div>
 						</section>
 
 						<!-- Third Section -->
 						<section id="third" class="main special">
+
 							<header class="major">
-								<h2>Country Imports</h2>
+									<h2>US Imports and Exports</h2>
+							</header>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="national_impexp" width=500 height=400>
+							</div>
+
+							<header class="major">
+								<h2>US Imports by Category</h2>
 							</header>
 							<div class="chart-container" style="position: relative;">
 								<canvas id="country_imports" width=500 height=400>
@@ -169,46 +205,7 @@
 						<!-- Fourth Section -->
 							<section id="fourth" class="main special">
 								<header class="major">
-									<h2>World Map Data</h2>
-									<h4>Last Updated: 2020-11-18</h4>
-								  </header>
-								  <div id="svgMapGPD"></div>
-								  <script src="assets/js/gdp.js"></script>
-								  <script src="assets/js/countriesEN.js"></script>
-								  <script>
-									setTimeout(() => {  
-									new svgMap({
-										targetElementID: 'svgMapGPD',
-										data: svgMapDataGPD,
-										colorMin: '#FFF0F9',
-										colorMax: '#730B62'
-									});
-									}, 1000);
-								  </script>
-								  <footer class="major">
-									<ul>
-									  <li>Elapsed Query Time: <a id="worldmaptime"></a></li>
-									  <script>setTimeout(() => {  
-								document.getElementById("worldmaptime").innerHTML = timeelapsed + " nanoseconds";
-							}, 1000);</script>
-									</ul>
-								  </footer>
-							</section>
-						<!-- Get Started -->
-							<section id="cta" class="main special">
-								<header class="major">
-									<h2>random</h2>
-									<p>anything here</p>
-								</header>
-								<footer class="major">
-									<ul class="actions special">
-										<li><a href="generic.html" class="button primary">Get Started</a></li>
-										<li><a href="generic.html" class="button">Learn More</a></li>
-									</ul>
-								</footer>
-
-								<header class="major">
-									<h2>State Unemployment</h2>
+									<h2>US State Unemployment</h2>
 								  </header>
 								  <ul class="features">
 									<li>Search by State: <input type="text" id="search_su_state" placeholder="State Name"> <br\></li>
@@ -271,6 +268,19 @@
 									still need to figure out
 									  </p>
 									</footer>
+								
+							</section>
+						<!-- Get Started -->
+							<section id="cta" class="main special">
+								<header class="major">
+									<h2>Data Sources</h2>
+									<p>Insert Data Sources Here</p>
+								</header>
+								<footer class="major">
+									
+								</footer>
+
+								
 							</section>
 
 					</div>
@@ -278,29 +288,23 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<h2>Aliquam sed mauris</h2>
-							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn More</a></li>
-							</ul>
+							<h2>Thank you for viewing our website!</h2>
+							<p>We hope you enjoyed our website and learned something about how COVID-19 has effected the US and global economies.  Please, feel free to reach out to any of us by email if you have any questions.  By staying home, wearing your mask, social distancing, washing your hands frequently, and following CDC guidelines, we can overcome COVID-19 together!</p>
+							
 						</section>
 						<section>
-							<h2>Etiam feugiat</h2>
+							<h2>Emails</h2>
 							<dl class="alt">
-								<dt>Address</dt>
-								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
-								<dt>Phone</dt>
-								<dd>(000) 000-0000 x 0000</dd>
-								<dt>Email</dt>
-								<dd><a href="#">information@untitled.tld</a></dd>
+								<dt>AveBisesi</dt>
+								<dd>email</dd>
+								<dt>BeccaDura</dt>
+								<dd>dura0083@umn.edu</dd>
+								<dt>HezkielNanda</dt>
+								<dd>email</a></dd>
+								<dt>SamJohnson</dt>
+								<dd>email</dd>
 							</dl>
-							<ul class="icons">
-								<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>
-							</ul>
+							
 						</section>
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer>
@@ -347,21 +351,7 @@
 				return jsonArray;
 			}
 
-			function formatcpData(dataArray) {
-				console.log("data sent length: "+dataArray.length);
-				var country = [];
-				var pop_2020 = [];
-				var pop_2019 = [];
-	    
-				for(var i = 0; i < dataArray.length; i++) {
-				country[i] = dataArray[i].CountryName;
-				pop_2020[i] = dataArray[i]["2020Population"];
-				pop_2019[i] = dataArray[i]["2019Population"];
-				}
-	    
-				var jsonArray = [country, pop_2020, pop_2019];
-				return jsonArray;
-			}
+			
 
 			function formatciData(dataArray) {
 			    console.log("data sent length: "+dataArray.length);
@@ -415,6 +405,53 @@
 				var jsonArray = [Commodity, c2019Jan, c2019Feb, c2019Mar, c2019Apr, c2019May, c2019Jun, c2019Jul, c2019Aug, c2019Sep, c2019Oct, c2019Nov, c2019Dec, c2020Jan, c2020Feb, c2020Mar, c2020Apr, c2020May, c2020Jun, c2020Jul, c2020Aug, c2020Sep];
 			    return jsonArray;
 			}
+
+
+			function formatnieData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+				var SubCategory1 = [];
+				var Q1_2019 = [];
+				var Q2_2019 = [];
+				var Q3_2019 = [];
+				var Q4_2019 = [];
+				var Q1_2020 = [];
+				var Q2_2020 = [];
+				var Q3_2020 = [];
+			    for(var i = 0; i < dataArray.length; i++) {
+			        SubCategory1[i] = dataArray[i].SubCategory1;
+					Q1_2019[i] = dataArray[i].Q1_2019;
+					Q2_2019[i] = dataArray[i].Q2_2019;
+					Q3_2019[i] = dataArray[i].Q3_2019;
+					Q4_2019[i] = dataArray[i].Q4_2019;
+					Q1_2020[i] = dataArray[i].Q1_2020;
+					Q2_2020[i] = dataArray[i].Q2_2020;
+					Q3_2020[i] = dataArray[i].Q3_2020;
+			    }
+				var jsonArray = [SubCategory1, Q1_2019, Q2_2019, Q3_2019, Q4_2019, Q1_2020, Q2_2020, Q3_2020];
+			    return jsonArray;
+			}
+			
+			function formatngData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+				var Q1_2019 = [];
+				var Q2_2019 = [];
+				var Q3_2019 = [];
+				var Q4_2019 = [];
+				var Q1_2020 = [];
+				var Q2_2020 = [];
+				var Q3_2020 = [];
+			    for(var i = 0; i < dataArray.length; i++) {
+					Q1_2019[i] = dataArray[i].Q1_2019;
+					Q2_2019[i] = dataArray[i].Q2_2019;
+					Q3_2019[i] = dataArray[i].Q3_2019;
+					Q4_2019[i] = dataArray[i].Q4_2019;
+					Q1_2020[i] = dataArray[i].Q1_2020;
+					Q2_2020[i] = dataArray[i].Q2_2020;
+					Q3_2020[i] = dataArray[i].Q3_2020;
+			    }
+				var jsonArray = [Q1_2019, Q2_2019, Q3_2019, Q4_2019, Q1_2020, Q2_2020, Q3_2020];
+			    return jsonArray;
+			}
 	
 	
 			$.post("http://localhost:8080/state_covid", function(data) {
@@ -454,43 +491,7 @@
 						});
 					})
 	
-			$.post("http://localhost:8080/country_population", function(data) {
-				listdata = formatcpData(data);
-				var ctx = document.getElementById('country_population').getContext('2d');
-				var chart = new Chart(ctx, {
-				// The type of chart we want to create
-				type: 'bar',
-		
-				// The data for our dataset
-				data: {
-					labels: listdata[0],
-					datasets: [{
-					label: '2020',
-					backgroundColor: 'rgb(255, 0, 132)',
-					borderColor: 'rgb(255, 0, 132)',
-					data: listdata[1]
-					},
-						   {
-						   label: '2019',
-						   backgroundColor: 'rgb(0, 0, 132)',
-						   borderColor: 'rgb(0, 0, 132)',
-						   data: listdata[2]
-						   }]
-				},
-		
-				options: {
-					scales: {
-					yAxes: [{
-						scaleLabel: {
-						display: true,
-						labelString: 'Population (log10 Scale)',
-						},
-						type: 'logarithmic'
-					}]
-					}
-				}
-				});
-			})
+			
 
 			$.post("http://localhost:8080/country_imports", function(data) {
 				listdata = formatciData(data);
@@ -567,6 +568,70 @@
 				}
 				});
 			})
+
+			$.post("http://localhost:8080/national_impexp", function(data) {
+				listdata = formatnieData(data);
+				var ctx = document.getElementById('national_impexp').getContext('2d');
+				var chart = new Chart(ctx, {
+					// The type of chart we want to create
+					type: 'line',
+					// The data for our dataset
+					data: {
+						labels: ['First Quarter 2019', 'Second Quarter 2019', 'Third Quarter 2019', 'Fourth Quarter 2019', 'First Quarter 2020', 'Second Quarter 2020', 'Third Quarter 2020'],
+						datasets: [{ 
+						data: [listdata[1][0], listdata[2][0], listdata[3][0], listdata[4][0], listdata[5][0], listdata[6][0], listdata[7][0]],
+						label: listdata[0][0],
+						borderColor: "#3e95cd",
+						fill: false
+					  },{ 
+						data: [listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1]],
+						label: listdata[0][1],
+						borderColor: "#ff5733",
+						fill: false
+					  }]
+					},
+		
+				options: {
+					scales: {
+					yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'Billions of Dollars',
+						}
+					}]
+					}
+				}
+				});
+			})
+
+			$.post("http://localhost:8080/national_gdp", function(data) {
+						listdata = formatngData(data);
+						var ctx = document.getElementById('national_gdp').getContext('2d');
+						var chart = new Chart(ctx, {
+							// The type of chart we want to create
+							type: 'bar',
+							// The data for our dataset
+							data: {
+								labels: ['First Quarter 2019', 'Second Quarter 2019', 'Third Quarter 2019', 'Fourth Quarter 2019', 'First Quarter 2020', 'Second Quarter 2020', 'Third Quarter 2020'],
+								datasets: [{
+									label: 'National GDP',
+									backgroundColor: 'rgb(255, 0, 132)',
+									borderColor: 'rgb(255, 0, 132)',
+									data: listdata
+								}]
+							},
+							options: {
+								scales: {
+									yAxes: [{
+										scaleLabel: {
+											display: true,
+											labelString: 'Billions of Dollars',
+										},
+									}]
+								}
+							}
+						});
+					})
 
       </script>
 

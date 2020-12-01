@@ -5,6 +5,6 @@
     "\\views\\assets",
     "\\views\\pages"
   ],
-  "SelectedNode": "\\server.js",
+  "SelectedNode": "\\views\\pages\\index.ejs",
   "PreviewInSolutionExplorer": false
 }
