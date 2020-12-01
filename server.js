@@ -33,16 +33,26 @@ app.listen(8080,()=>console.log('express server is running at port 8080'));
 app.get('/', function (req, res) {
     // Render index page
 
-    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.NewCases, gc.TotalDeaths, gc.NewDeaths FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.CountryName',(err,global_covid,fields)=>{
-        if (err) {
-            console.error('error connecting: ' + err.stack);
+    // Global Covid query
+    mysqlConnection.query('SELECT gc.CountryName, gc.TotalCases, gc.NewCases, gc.TotalDeaths, gc.NewDeaths FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.CountryName',(gc_err,global_covid,gc_fields)=>{
+        if (gc_err) {
+            console.error('error connecting: ' + gc_err.stack);
             return;
-        }else{
-            res.render('pages/index', {
-                // EJS variable and server-side variable
-                global_covid: global_covid
-            });
         }
+	
+	// State Unemployment query (must be nested so that the global_covid and state_unemployment render simultaneously
+	mysqlConnection.query('SELECT su.StateName, su.InitialClaims, su.ContinuedClaims, su.InsuredUnemploymentRate FROM state_unemployment su WHERE su.FiledWeekEnded = "2020-10-31" ORDER BY su.StateName',(su_err,state_unemployment,su_fields)=>{
+            if (su_err) {
+		console.error('error connecting: ' + su_err.stack);
+		return;
+            }else{
+		res.render('pages/index', {
+                    // EJS variable and server-side variable
+                    global_covid: global_covid,
+		    state_unemployment: state_unemployment
+		});
+            }
+	});
     });
 });
 
