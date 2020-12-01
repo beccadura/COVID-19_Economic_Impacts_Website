@@ -1,0 +1,94 @@
+<script>
+			var search_cp_country = document.querySelector("#search_cp_country");
+			search_cp_country.addEventListener("keyup", function (e) {
+				var span_items2 = document.querySelectorAll(".table_body ul li .item .cpcountry span");
+				var cp_country = e.target.value.toLowerCase();
+
+				span_items2.forEach(function (item) {
+					if (item.textContent.toLowerCase().indexOf(cp_country) != -1) {
+						item.closest("li").style.display = "block";
+						// console.log("true");
+					} else {
+						item.closest("li").style.display = "none";
+						// console.log("false");
+					}
+				});
+				console.log(cp_country);
+			});
+		</script>
+
+
+
+
+		<ul class="features">
+									<li>Search by Country: <input type="text" id="search_cp_country" placeholder="Country Name"> <br\></li>
+								</ul>
+								<div class="table_wrap">
+									<div class="table_header">
+										<ul>
+											<li>
+												<div class="item">
+													<div class="cpcountry" style="height:inherit;">
+														<span>COUNTRY</span>
+													</div>
+													<div class="cppopulation" style="height:inherit;">
+														<span>Population</span>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="table_body">
+										<ul id="cpitem">
+											<%
+											if(country_population.length!=0){
+											country_population.forEach(function(cp){
+											%>
+											<li style="display: block;">
+												<div class="item">
+													<div class="cpcountry" style="height:inherit;">
+														<span><%=cp.CountryName %></span>
+													</div>
+													<div class="cppopulation" style="height:inherit;">
+														<span><%=cp.2016Population %></span>
+													</div>
+												</div>
+											</li>
+											<% 		}) %>
+											<% 	} else { %>
+											<li style="display: block;">
+												<div class="item">
+													<span>NO DATA FOUND</span>
+												</div>
+											</li>
+											<% 	} %>
+										</ul>
+									</div>
+									<div class="table_footer"></div>
+								</div>
+								<footer class="major">
+									<ul>
+										<li>in progress: sorting</li>
+										<li>Table last update: 2020-10-25</li>
+									</ul>
+								</footer>
+
+
+
+
+
+
+sc.TotalHospitalized, sc.TotalNegative, sc.Positive, sc.TotalOnVentilator, sc.Recovered, sc.TotalTests
+
+
+app.post('/state_covid', function (req, res) {
+
+    mysqlConnection.query('SELECT s.StateName, sc.TotalDeaths, sc.TotalICU, sc.TotalHospitalized, sc.TotalNegative, sc.Positive, sc.TotalOnVentilator, sc.Recovered, sc.TotalTests FROM state_covid sc JOIN states s ON sc.State = s.StateCode WHERE sc.Date = "2020-11-18" ORDER BY s.StateName',(err,rows,fields)=>{
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        }else{
+            res.send(rows);
+        }
+    });
+})

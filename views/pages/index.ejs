@@ -6,8 +6,11 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/svgMap.css" />
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/svgMap.js"></script>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<link rel="shortcut icon" href="images/favicon.ico"/>
+		<link rel="shortcut icon" href="assets/img/favicon.ico"/>
 	</head>
 	<body class="is-preload">
 
@@ -16,19 +19,19 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<span class="logo"><img src="images/logo.svg" alt="" /></span>
+						<span class="logo"><img src="assets/img/logo.svg" alt="" /></span>
 						<h1>COVID-19 Informational Website</h1>
 						<p>CSCI5707 Team 9 Project<br />
-						Ave Bisesi, Becca Dura, Samuel Johnson, Hezkiel Nanda</p>
+						  Ave Bisesi, Becca Dura, Samuel Johnson, Hezkiel Nanda</p>
 					</header>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="#intro" class="active">Global Cases</a></li>
-							<li><a href="#first">Top Cases</a></li>
-							<li><a href="#second">Second Section</a></li>
-							<li><a href="#third">Third Section</a></li>
+							<li><a href="#intro" class="active">State Cases</a></li>
+							<li><a href="#first">State Positive Cases & Deaths</a></li>
+							<li><a href="#second">Country Populations</a></li>
+							<li><a href="#third">Country Imports</a></li>
 							<li><a href="#fourth">Fourth Section</a></li>
 							<li><a href="#cta">Get Started</a></li>
 						</ul>
@@ -40,45 +43,75 @@
 						<!-- Introduction -->
 						<section id="intro" class="main special">
                             <header class="major">
-                                <h2>COVID-19 Global Cases</h2>
+                                <h2>COVID-19 State Cases</h2>
                             </header>
                             <ul class="features">
-                                <li>Search by Country: <input type="text" id="search_gc_country" placeholder="Country Name"> <br\></li>
+                                <li>Search by State: <input type="text" id="search_sc_state" placeholder="State Name"> <br\></li>
                             </ul>
                             <div class="table_wrap">
                                 <div class="table_header">
                                     <ul>
                                         <li>
                                             <div class="item">
-                                                <div class="gccountry" style="height:inherit;">
-                                                    <span>COUNTRY</span>
+                                                <div class="scstate" style="height:inherit; width:15%;">
+                                                    <span>STATE</span>
                                                 </div>
-                                                <div class="gcncases" style="height:inherit;">
-                                                    <span>TOTAL CASES</span>
+												<div class="scpositive" style="height:inherit; width:12%;">
+                                                    <span>TOTAL POSITIVE</span>
                                                 </div>
-                                                <div class="gcccases" style="height:inherit;">
-                                                    <span>NEW CASES</span>
+                                                <div class="scdeaths" style="height:inherit; width:12%;">
+                                                    <span>TOTAL DEATHS</span>
+                                                </div>
+												<div class="scnegative" style="height:inherit; width:12%;">
+                                                    <span>TOTAL NEGATIVE</span>
+                                                </div>
+												<div class="screcovered" style="height:inherit; width:12%;">
+                                                    <span>TOTAL RECOVERED</span>
+                                                </div>
+												<div class="sctests" style="height:inherit; width:12%;">
+                                                    <span>TOTAL TESTS</span>
+                                                </div>
+												<div class="schospitalized" style="height:inherit; width:12%;">
+                                                    <span>TOTAL HOSPITALIZED</span>
+                                                </div>
+                                                <div class="scicu" style="height:inherit; width:12%;">
+                                                    <span>TOTAL ICU</span>
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="table_body">
-                                    <ul id="gcitem">
+                                    <ul id="scitem">
                                         <%
-                                        if(global_covid.length!=0){
-                                        global_covid.forEach(function(gc){
+                                        if(state_covid.length!=0){
+                                        state_covid.forEach(function(sc){
                                         %>
                                         <li style="display: block;">
                                             <div class="item">
-                                                <div class="gccountry" style="height:inherit;">
-                                                    <span><%=gc.CountryName %></span>
+                                                <div class="scstate" style="height:inherit; width:15%;">
+                                                    <span><%=sc.StateName %></span>
                                                 </div>
-                                                <div class="gcncases" style="height:inherit;">
-                                                    <span><%=gc.TotalCases %></span>
+												<div class="scpositive" style="height:inherit; width:12%;">
+                                                    <span><%=sc.Positive %></span>
                                                 </div>
-                                                <div class="gcccases" style="height:inherit;">
-                                                    <span><%=gc.NewCases %></span>
+                                                <div class="scdeaths" style="height:inherit; width:12%;">
+                                                    <span><%=sc.TotalDeaths %></span>
+                                                </div>
+												<div class="scnegative" style="height:inherit; width:12%;">
+                                                    <span><%=sc.TotalNegative %></span>
+                                                </div>
+												<div class="screcovered" style="height:inherit; width:12%;">
+                                                    <span><%=sc.Recovered %></span>
+                                                </div>
+												<div class="sctests" style="height:inherit; width:12%;">
+                                                    <span><%=sc.TotalTests %></span>
+                                                </div>
+												<div class="schospitalized" style="height:inherit; width:12%;">
+                                                    <span><%=sc.TotalHospitalized %></span>
+                                                </div>
+                                                <div class="scicu" style="height:inherit; width:12%;">
+                                                    <span><%=sc.TotalICU %></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -96,67 +129,70 @@
                             </div>
                             <footer class="major">
                                 <ul>
-                                    <li>in progress: sorting</li>
-                                    <li>Table last update: 2020-10-25</li>
+                                    <li>Table Showing Data From: 11-18-2020</li>
                                 </ul>
                             </footer>
                         </section>
 
 						<!-- First Section -->
-						<section id="first" class="main">
+						<section id="first" class="main special">
 							<header class="major">
-								<h2>Top Cases</h2>
+								<h2>States with Most Covid Cases</h2>
 							</header>
-							<canvas id="global_covid" width=500 height=400></canvas>
-							<footer class="major">
-								<ul>
-									<li>in progress: search country</li>
-									<li> checkboxes for dataset to display</li>
-								</ul>
-							</footer>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="state_covid" width=500 height=400>
+							</div>
 						</section>
 
 						<!-- Second Section -->
 						<section id="second" class="main special">
-							<div class="spotlight">
-								<div class="content">
-									<header class="major">
-										<h2>Population</h2>
-									</header>
-								</div>
+						<div>
+							<header class="major">
+								<h2>Country Populations</h2>
+							</header>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="country_population" width=500 height=400>
 							</div>
-							<canvas id="global_population" width=500 height=400></canvas>
-							<footer class="major">
-								<ul>
-									<li>in progress: search country </li>
-									<li>checkbox for dataset to display</li>
-								</ul>
-							</footer>
+						</div>
 						</section>
 
 						<!-- Third Section -->
-							<section id="third" class="main">
-								<header class="major">
-									<h2>Economic data</h2>
-								</header>
-								<footer class="major">
-									<ul>
-										<li>in progress: dataset </li>
-										<li>checkbox for dataset column to display</li>
-									</p>
-								</footer>
-							</section>
+						<section id="third" class="main special">
+							<header class="major">
+								<h2>Country Imports</h2>
+							</header>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="country_imports" width=500 height=400>
+							</div>
+						</section>
 
 						<!-- Fourth Section -->
 							<section id="fourth" class="main special">
 								<header class="major">
-									<h2>combinations</h2>
-								</header>
-								<footer class="major">
-									<p>
-										still need to figure out
-									</p>
-								</footer>
+									<h2>World Map Data</h2>
+									<h4>Last Updated: 2020-11-18</h4>
+								  </header>
+								  <div id="svgMapGPD"></div>
+								  <script src="assets/js/gdp.js"></script>
+								  <script src="assets/js/countriesEN.js"></script>
+								  <script>
+									setTimeout(() => {  
+									new svgMap({
+										targetElementID: 'svgMapGPD',
+										data: svgMapDataGPD,
+										colorMin: '#FFF0F9',
+										colorMax: '#730B62'
+									});
+									}, 1000);
+								  </script>
+								  <footer class="major">
+									<ul>
+									  <li>Elapsed Query Time: <a id="worldmaptime"></a></li>
+									  <script>setTimeout(() => {  
+								document.getElementById("worldmaptime").innerHTML = timeelapsed + " nanoseconds";
+							}, 1000);</script>
+									</ul>
+								  </footer>
 							</section>
 						<!-- Get Started -->
 							<section id="cta" class="main special">
@@ -170,6 +206,71 @@
 										<li><a href="generic.html" class="button">Learn More</a></li>
 									</ul>
 								</footer>
+
+								<header class="major">
+									<h2>State Unemployment</h2>
+								  </header>
+								  <ul class="features">
+									<li>Search by State: <input type="text" id="search_su_state" placeholder="State Name"> <br\></li>
+								  </ul>
+								  <div class="table_wrap">
+									<div class="table_header">
+									  <ul>
+									<li>
+									  <div class="item">
+										<div class="sustate" style="height:inherit; width:25%;">
+										  <span>STATE</span>
+										</div>
+										<div class="suinitialclaims" style="height:inherit; width:25%;">
+										  <span>NEW CLAIMS</span>
+										</div>
+										<div class="sucontinuedclaims" style="height:inherit; width:25%;">
+										  <span>TOTAL CURRENT CLAIMS</span>
+										</div>
+										<div class="suunemploymentrate" style="height:inherit; width:25%;">
+										  <span>UNEMPLOYMENT RATE</span>
+										</div>
+									  </div>
+									</li>
+									  </ul>
+									</div>
+									<div class="table_body">
+									  <ul id="suitem">
+									<%
+									  if(state_unemployment.length!=0){
+									  state_unemployment.forEach(function(su){
+									  %>
+									<li style="display: block;">
+									  <div class="item">
+										<div class="sustate" style="height:inherit; width:25%;">
+										  <span><%=su.StateName %></span>
+										</div>
+										<div class="suinitialclaims" style="height:inherit; width:25%;">
+										  <span><%=su.InitialClaims %></span>
+										</div>
+										<div class="sucontinuedclaims" style="height:inherit; width:25%;">
+										  <span><%=su.ContinuedClaims %></span>
+										</div>
+										<div class="suunemploymentrate" style="height:inherit; width:25%;">
+										  <span><%=su.InsuredUnemploymentRate %></span>
+										</div>
+									  </div>
+									</li>
+									<% 		}) %>
+									<% 	} else { %>
+									<li style="display: block;">
+									  <div class="item">
+										<span>NO DATA FOUND</span>
+									  </div>
+									</li>
+									<% 	} %>
+									  </ul>
+									</div>
+									<footer class="major">
+									  <p>
+									still need to figure out
+									  </p>
+									</footer>
 							</section>
 
 					</div>
@@ -215,65 +316,211 @@
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 		<script>
 			// code to draw graph
-			function formatgcData(dataArray) {
-			    console.log("data sent length: "+dataArray.length);
-			    var country = [];
-				var cumulative_cases = [];
-				var cumulative_deaths = [];
-				var new_cases = [];
-				var new_deaths = [];
-			    for(var i = 0; i < dataArray.length; i++) {
-			        // console.log(dataArray[i].state_name);
-			        country[i] = dataArray[i].country;
-					cumulative_cases[i] = dataArray[i].cumulative_cases;
-					cumulative_deaths[i] = dataArray[i].cumulative_deaths;
-					new_cases[i] = dataArray[i].new_cases;
-					new_deaths[i] = dataArray[i].new_deaths;
-			    }
+			function formatscData(dataArray) {
+				console.log("data sent length: "+dataArray.length);
+				var StateName = []; 
+				var TotalDeaths = [];
+				var TotalICU = [];
+				var TotalHospitalized = [];
+				var TotalNegative = [];
+				var Positive = [];
+				var TotalOnVentilator = [];
+				var Recovered = [];
+				var TotalTests = [];
+				for(var i = 0; i < dataArray.length; i++) {
+					// console.log(dataArray[i].state_name);
+					StateName[i] = dataArray[i].StateName;
+					TotalDeaths[i] = dataArray[i].TotalDeaths;
+					TotalICU[i] = dataArray[i].TotalICU;
+					TotalHospitalized[i] = dataArray[i].TotalHospitalized;
+					TotalNegative[i] = dataArray[i].TotalNegative;
+					Positive[i] = dataArray[i].Positive;
+					TotalOnVentilator[i] = dataArray[i].TotalOnVentilator;
+					Recovered[i] = dataArray[i].Recovered;
+					TotalTests[i] = dataArray[i].TotalTests;
+				}
 
-			    var jsonArray = [country, new_cases,cumulative_cases,new_deaths,cumulative_deaths];
-			    return jsonArray;
+				var jsonArray = [StateName, TotalDeaths, TotalICU, TotalHospitalized, TotalNegative, Positive, TotalOnVentilator, Recovered, TotalTests];
+				return jsonArray;
 			}
-			function formatgpData(dataArray) {
-			    console.log("data sent length: "+dataArray.length);
-			    var country = [];
+			function formatcpData(dataArray) {
+				console.log("data sent length: "+dataArray.length);
+				var country = [];
 				var pop_2020 = [];
-				var pop_2015 = [];
+				var pop_2019 = [];
+	    
+				for(var i = 0; i < dataArray.length; i++) {
+				country[i] = dataArray[i].CountryName;
+				pop_2020[i] = dataArray[i]["2020Population"];
+				pop_2019[i] = dataArray[i]["2019Population"];
+				}
+	    
+				var jsonArray = [country, pop_2020, pop_2019];
+				return jsonArray;
+			}
 
+			
+	
+	
+			$.post("http://localhost:8080/state_covid", function(data) {
+						listdata = formatscData(data);
+						var ctx = document.getElementById('state_covid').getContext('2d');
+						var chart = new Chart(ctx, {
+							// The type of chart we want to create
+							type: 'bar',
+
+							// The data for our dataset
+							data: {
+								labels: listdata[0],
+								datasets: [{
+									label: 'Cumulative Cases',
+									backgroundColor: 'rgb(255, 0, 132)',
+									borderColor: 'rgb(255, 0, 132)',
+									data: listdata[5]
+								},{
+									label: 'Cumulative Deaths',
+									backgroundColor: 'rgb(0, 99, 132)',
+									borderColor: 'rgb(0, 99, 132)',
+									data: listdata[1]
+								}]
+							},
+
+							options: {
+								scales: {
+									yAxes: [{
+										scaleLabel: {
+											display: true,
+											labelString: 'Persons (log10)',
+										},
+										type: 'logarithmic'
+									}]
+								}
+							}
+						});
+					})
+	
+			$.post("http://localhost:8080/country_population", function(data) {
+				listdata = formatcpData(data);
+				var ctx = document.getElementById('country_population').getContext('2d');
+				var chart = new Chart(ctx, {
+				// The type of chart we want to create
+				type: 'bar',
+		
+				// The data for our dataset
+				data: {
+					labels: listdata[0],
+					datasets: [{
+					label: '2020',
+					backgroundColor: 'rgb(255, 0, 132)',
+					borderColor: 'rgb(255, 0, 132)',
+					data: listdata[1]
+					},
+						   {
+						   label: '2019',
+						   backgroundColor: 'rgb(0, 0, 132)',
+						   borderColor: 'rgb(0, 0, 132)',
+						   data: listdata[2]
+						   }]
+				},
+		
+				options: {
+					scales: {
+					yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'Persons (log10)',
+						},
+						type: 'logarithmic'
+					}]
+					}
+				}
+				});
+			})
+
+			
+	
+      </script>
+
+
+	  <script>
+	  function formatciData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+			    var Commodity = []; 
+				var 2019Jan = [];
+				var 2019Feb = [];
+				var 2019Mar = [];
+				var 2019Apr = [];
+				var 2019May = [];
+				var 2019Jun = [];
+				var 2019Jul = [];
+				var 2019Aug = [];
+				var 2019Sep = [];
+				var 2019Oct = [];
+				var 2019Nov = [];
+				var 2019Dec = [];
+				var 2020Jan = [];
+				var 2020Feb = [];
+				var 2020Mar = [];
+				var 2020Apr = [];
+				var 2020May = [];
+				var 2020Jun = [];
+				var 2020Jul = [];
+				var 2020Aug = [];
+				var 2020Sep = [];
 			    for(var i = 0; i < dataArray.length; i++) {
-			        country[i] = dataArray[i].country_name;
-					pop_2020[i] = dataArray[i].pop_2020;
-					pop_2015[i] = dataArray[i].pop_2015;
+			        Commodity[i] = dataArray[i].Commodity;
+					2019Jan[i] = dataArray[i].2019Jan;
+					2019Feb[i] = dataArray[i].2019Feb;
+					2019Mar[i] = dataArray[i].2019Mar;
+					2019Apr[i] = dataArray[i].2019Apr;
+					2019May[i] = dataArray[i].2019May;
+					2019Jun[i] = dataArray[i].2019Jun;
+					2019Jul[i] = dataArray[i].2019Jul;
+					2019Aug[i] = dataArray[i].2019Aug;
+					2019Sep[i] = dataArray[i].2019Sep;
+					2019Oct[i] = dataArray[i].2019Oct;
+					2019Nov[i] = dataArray[i].2019Nov;
+					2019Dec[i] = dataArray[i].2019Dec;
+					2020Jan[i] = dataArray[i].2020Jan;
+					2020Feb[i] = dataArray[i].2020Feb;
+					2020Mar[i] = dataArray[i].2020Mar;
+					2020Apr[i] = dataArray[i].2020Apr;
+					2020May[i] = dataArray[i].2020May;
+					2020Jun[i] = dataArray[i].2020Jun;
+					2020Jul[i] = dataArray[i].2020Jul;
+					2020Aug[i] = dataArray[i].2020Aug;
+					2020Sep[i] = dataArray[i].2020Sep;
 			    }
 
-			    var jsonArray = [country, pop_2020, pop_2015];
+				var jsonArray = [Commodity, 2019Jan, 2019Feb, 2019Mar, 2019Apr, 2019May, 2019Jun, 2019Jul, 2019Aug, 2019Sep, 2019Oct, 2019Nov, 2019Dec, 2020Jan, 2020Feb, 2020Mar, 2020Apr, 2020May, 2020Jun, 2020Jul, 2020Aug, 2020Sep];
 			    return jsonArray;
 			}
 
 
-			$.post("http://localhost:8080/global_covid", function(data) {
-				listdata = formatgcData(data);
-				var ctx = document.getElementById('global_covid').getContext('2d');
+	  $.post("http://localhost:8080/country_imports", function(data) {
+				listdata = formatciData(data);
+				var ctx = document.getElementById('country_imports').getContext('2d');
 				var chart = new Chart(ctx, {
 					// The type of chart we want to create
-					type: 'bar',
+					type: 'line',
 
 					// The data for our dataset
 					data: {
-						labels: listdata[0],
-						datasets: [{
-							label: 'Cumulative Cases',
-							backgroundColor: 'rgb(255, 0, 132)',
-							borderColor: 'rgb(255, 0, 132)',
-							data: listdata[2]
-						},{
-							label: 'Cumulative Deaths',
-							backgroundColor: 'rgb(0, 99, 132)',
-							borderColor: 'rgb(0, 99, 132)',
-							data: listdata[4]
-						}]
+						labels: ['2019Jan', '2019Feb', '2019Mar', '2019Apr', '2019May', '2019Jun', '2019Jul', '2019Aug', '2019Sep', '2019Oct', '2019Nov', '2019Dec', '2020Jan', '2020Feb', '2020Mar', '2020Apr', '2020May', '2020Jun', '2020Jul', '2020Aug', '2020Sep'],
+						datasets: [{ 
+						data: [listdata[0][0], listdata[1][0], listdata[2][0], listdata[3][0], listdata[4][0], listdata[5][0], listdata[6][0], listdata[7][0], listdata[8][0], listdata[9][0]],
+						label: "0",
+						borderColor: "#3e95cd",
+						fill: false
+					  },{ 
+						data: [listdata[0][1], listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1], listdata[8][1], listdata[9][1]],
+						label: "1",
+						borderColor: "#3e95cd",
+						fill: false
+					  }]
 					},
 
 					options: {
@@ -281,7 +528,7 @@
 							yAxes: [{
 								scaleLabel: {
 									display: true,
-									labelString: 'Persons (log10)',
+									labelString: 'Number (log10)',
 								},
 								type: 'logarithmic'
 							}]
@@ -289,54 +536,18 @@
 					}
 				});
 			})
+	  </script>
 
-			$.post("http://localhost:8080/global_population", function(data) {
-				listdata = formatgpData(data);
-				var ctx = document.getElementById('global_population').getContext('2d');
-				var chart = new Chart(ctx, {
-					// The type of chart we want to create
-					type: 'bar',
 
-					// The data for our dataset
-					data: {
-						labels: listdata[0],
-						datasets: [{
-							label: '2020',
-							backgroundColor: 'rgb(255, 0, 132)',
-							borderColor: 'rgb(255, 0, 132)',
-							data: listdata[1]
-						},
-						{
-							label: '2015',
-							backgroundColor: 'rgb(0, 0, 132)',
-							borderColor: 'rgb(0, 0, 132)',
-							data: listdata[2]
-						}]
-					},
 
-					options: {
-						scales: {
-							yAxes: [{
-								scaleLabel: {
-									display: true,
-									labelString: 'Persons (log10)',
-								},
-								type: 'logarithmic'
-							}]
-						}
-					}
-				});
-			})
-
-		</script>
 		<script>
-			var search_gc_country = document.querySelector("#search_gc_country");
-			search_gc_country.addEventListener("keyup", function (e) {
-				var span_items = document.querySelectorAll(".table_body ul li .item .gccountry span");
-				var gc_country = e.target.value.toLowerCase();
+			var search_sc_state = document.querySelector("#search_sc_state");
+			search_sc_state.addEventListener("keyup", function (e) {
+				var span_items = document.querySelectorAll(".table_body ul li .item .scstate span");
+				var sc_state = e.target.value.toLowerCase();
 
 				span_items.forEach(function (item) {
-					if (item.textContent.toLowerCase().indexOf(gc_country) != -1) {
+					if (item.textContent.toLowerCase().indexOf(sc_state) != -1) {
 						item.closest("li").style.display = "block";
 						// console.log("true");
 					} else {
@@ -344,7 +555,24 @@
 						// console.log("false");
 					}
 				});
-				console.log(gc_country);
+				console.log(sc_state);
+			});
+
+			var search_su_state = document.querySelector("#search_su_state");
+			search_su_state.addEventListener("keyup", function (e) {
+				var span_items = document.querySelectorAll(".table_body ul li .item .sustate span");
+				var su_state = e.target.value.toLowerCase();
+	    
+				span_items.forEach(function (item) {
+				if (item.textContent.toLowerCase().indexOf(su_state) != -1) {
+					item.closest("li").style.display = "block";
+					// console.log("true");
+				} else {
+					item.closest("li").style.display = "none";
+					// console.log("false");
+				}
+				});
+				console.log(su_state);
 			});
 		</script>
 	</body>
