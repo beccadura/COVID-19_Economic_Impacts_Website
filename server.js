@@ -111,6 +111,29 @@ app.post('/national_impexp', function (req, res) {
     });
 })
 
+app.post('/national_pc', function (req, res) {
+
+    mysqlConnection.query('SELECT ng.SubCategory1, ng.Q1_2019, ng.Q2_2019, ng.Q3_2019, ng.Q4_2019, ng.Q1_2020, ng.Q2_2020, ng.Q3_2020 FROM national_gdp ng WHERE ng.Category = "Personal consumption expenditures" AND (ng.SubCategory1 = "Goods" OR ng.SubCategory1 = "Services") AND (ng.SubCategory2 = "Overall")', (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            res.send(rows);
+        }
+    });
+})
+
+app.post('/national_egs', function (req, res) {
+mysqlConnection.query('SELECT nei.Category, nei.SubCategory1, nei.Q1_2019, nei.Q2_2019, nei.Q3_2019, nei.Q4_2019, nei.Q1_2020, nei.Q2_2020, nei.Q3_2020 FROM national_exports_imports nei WHERE nei.Category = "Exports of goods" AND nei.SubCategory2="Overall" AND NOT nei.SubCategory1="Overall"', (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            res.send(rows);
+        }
+    });
+})
+
 app.post('/country_population', function (req, res) {
 
     mysqlConnection.query('SELECT cp.CountryName, cp.2019Population, cp.2020Population FROM country_population cp JOIN (SELECT gc.CountryCode FROM global_covid gc WHERE gc.Date = "2020-11-18" ORDER BY gc.TotalDeaths desc LIMIT 30) a ON a.CountryCode = cp.CountryCode WHERE cp.2020Population IS NOT NULL ORDER BY cp.2020Population DESC LIMIT 25', (err, rows, fields) => {

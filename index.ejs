@@ -34,6 +34,8 @@
 							<li><a href="#third">Country Imports</a></li>
 							<li><a href="#fourth">US Imports and Exports</a></li>
 							<li><a href="#fifth">US National GDP</a></li>
+							<li><a href="#sixth">US Personal Consumption</a></li>
+							<li><a href="#seventh">US Exports of Goods and Services</a></li>
 							<li><a href="#cta">Get Started</a></li>
 						</ul>
 					</nav>
@@ -216,6 +218,27 @@
 							</div>
 						</section>
 						
+						<!-- Third Section -->
+						<section id="seventh" class="main special">
+							<header class="major">
+								<h2>US Personal Consumption</h2>
+							</header>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="national_pc" width=500 height=400>
+							</div>
+						</section>
+						
+						<!-- Third Section -->
+						<section id="seventh" class="main special">
+							<header class="major">
+								<h2>US Export of Goods</h2>
+							</header>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="national_egs" width=500 height=400>
+							</div>
+						</section>
+						
+				
 						<!-- Get Started -->
 							<section id="cta" class="main special">
 								<header class="major">
@@ -463,6 +486,31 @@
 			    return jsonArray;
 			}
 			
+			function formatnegsData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+				var SubCategory1 = [];
+				var Q1_2019 = [];
+				var Q2_2019 = [];
+				var Q3_2019 = [];
+				var Q4_2019 = [];
+				var Q1_2020 = [];
+				var Q2_2020 = [];
+				var Q3_2020 = [];
+			    for(var i = 0; i < dataArray.length; i++) {
+			        SubCategory1[i] = dataArray[i].SubCategory1;
+					Q1_2019[i] = dataArray[i].Q1_2019;
+					Q2_2019[i] = dataArray[i].Q2_2019;
+					Q3_2019[i] = dataArray[i].Q3_2019;
+					Q4_2019[i] = dataArray[i].Q4_2019;
+					Q1_2020[i] = dataArray[i].Q1_2020;
+					Q2_2020[i] = dataArray[i].Q2_2020;
+					Q3_2020[i] = dataArray[i].Q3_2020;
+			    }
+
+				var jsonArray = [SubCategory1, Q1_2019, Q2_2019, Q3_2019, Q4_2019, Q1_2020, Q2_2020, Q3_2020];
+			    return jsonArray;
+			}
+			
 			function formatngData(dataArray) {
 			    console.log("data sent length: "+dataArray.length);
 				var Q1_2019 = [];
@@ -483,6 +531,31 @@
 			    }
 
 				var jsonArray = [Q1_2019, Q2_2019, Q3_2019, Q4_2019, Q1_2020, Q2_2020, Q3_2020];
+			    return jsonArray;
+			}
+			
+			function formatnpcData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+				var SubCategory1 = [];
+				var Q1_2019 = [];
+				var Q2_2019 = [];
+				var Q3_2019 = [];
+				var Q4_2019 = [];
+				var Q1_2020 = [];
+				var Q2_2020 = [];
+				var Q3_2020 = [];
+			    for(var i = 0; i < dataArray.length; i++) {
+					SubCategory1[i] = dataArray[i].SubCategory1;
+					Q1_2019[i] = dataArray[i].Q1_2019;
+					Q2_2019[i] = dataArray[i].Q2_2019;
+					Q3_2019[i] = dataArray[i].Q3_2019;
+					Q4_2019[i] = dataArray[i].Q4_2019;
+					Q1_2020[i] = dataArray[i].Q1_2020;
+					Q2_2020[i] = dataArray[i].Q2_2020;
+					Q3_2020[i] = dataArray[i].Q3_2020;
+			    }
+
+				var jsonArray = [SubCategory1, Q1_2019, Q2_2019, Q3_2019, Q4_2019, Q1_2020, Q2_2020, Q3_2020];
 			    return jsonArray;
 			}
 	
@@ -687,6 +760,98 @@
 					  },{ 
 						data: [listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1]],
 						label: listdata[0][1],
+						borderColor: "#ff5733",
+						fill: false
+					  }]
+					},
+		
+				options: {
+					scales: {
+					yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'Billions of Dollars',
+						}
+					}]
+					}
+				}
+				});
+			})
+			
+			$.post("http://localhost:8080/national_pc", function(data) {
+				listdata = formatnpcData(data);
+				var ctx = document.getElementById('national_pc').getContext('2d');
+				var chart = new Chart(ctx, {
+					// The type of chart we want to create
+					type: 'line',
+
+					// The data for our dataset
+					data: {
+						labels: ['First Quarter 2019', 'Second Quarter 2019', 'Third Quarter 2019', 'Fourth Quarter 2019', 'First Quarter 2020', 'Second Quarter 2020', 'Third Quarter 2020'],
+						datasets: [{ 
+						data: [listdata[1][0], listdata[2][0], listdata[3][0], listdata[4][0], listdata[5][0], listdata[6][0], listdata[7][0]],
+						label: listdata[0][0],
+						borderColor: "#3e95cd",
+						fill: false
+					  },{ 
+						data: [listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1]],
+						label: listdata[0][1],
+						borderColor: "#ff5733",
+						fill: false
+					  }]
+					},
+		
+				options: {
+					scales: {
+					yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'Billions of Dollars',
+						}
+					}]
+					}
+				}
+				});
+			})
+			
+			$.post("http://localhost:8080/national_egs", function(data) {
+				listdata = formatnegsData(data);
+				var ctx = document.getElementById('national_egs').getContext('2d');
+				var chart = new Chart(ctx, {
+					// The type of chart we want to create
+					type: 'line',
+
+					// The data for our dataset
+					data: {
+						labels: ['First Quarter 2019', 'Second Quarter 2019', 'Third Quarter 2019', 'Fourth Quarter 2019', 'First Quarter 2020', 'Second Quarter 2020', 'Third Quarter 2020'],
+						datasets: [{ 
+						data: [listdata[1][0], listdata[2][0], listdata[3][0], listdata[4][0], listdata[5][0], listdata[6][0], listdata[7][0]],
+						label: listdata[0][0],
+						borderColor: "#3e95cd",
+						fill: false
+					  },{ 
+						data: [listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1]],
+						label: listdata[0][1],
+						borderColor: "#33fdff",
+						fill: false
+					},{ 
+						data: [listdata[1][2], listdata[2][2], listdata[3][2], listdata[4][2], listdata[5][2], listdata[6][2], listdata[7][2]],
+						label: listdata[0][2],
+						borderColor: "#ffe933",
+						fill: false
+						},{ 
+						data: [listdata[1][3], listdata[2][3], listdata[3][3], listdata[4][3], listdata[5][3], listdata[6][3], listdata[7][3]],
+						label: listdata[0][3],
+						borderColor: "#53ff33",
+						fill: false
+						},{ 
+						data: [listdata[1][4], listdata[2][4], listdata[3][4], listdata[4][4], listdata[5][4], listdata[6][4], listdata[7][4]],
+						label: listdata[0][4],
+						borderColor: "#ff333c",
+						fill: false
+						},{ 
+						data: [listdata[1][5], listdata[2][5], listdata[3][5], listdata[4][5], listdata[5][5], listdata[6][5], listdata[7][5]],
+						label: listdata[0][5],
 						borderColor: "#ff5733",
 						fill: false
 					  }]
