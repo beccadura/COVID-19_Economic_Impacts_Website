@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="assets/css/svgMap.css" />
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/svgMap.js"></script>
+		<script src="assets/js/usmapdata.js"></script>
+		<script src="assets/js/usmap.js"></script>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<link rel="shortcut icon" href="assets/img/favicon.ico"/>
 	</head>
@@ -160,11 +162,20 @@
                                 </div>
                                 <div class="table_footer"></div>
                             </div>
-                            <footer class="major">
-                                <ul>
-                                    <li>Table Showing Data From: 11-18-2020</li>
-                                </ul>
-                            </footer>
+
+							<header class="major">
+								<h2>US Map COVID-19 Data</h2>
+							</header>
+                            
+							<div id="usamap"></div>
+								<footer class="major">
+									<ul>
+										<li>Elapsed Query Time: <a id="usamaptime"></a></li>
+										<script>setTimeout(() => {  
+											document.getElementById("usamaptime").innerHTML = usaelapsed + " nanoseconds";
+										}, 1000);</script>
+									</ul>
+								</footer>
 
 							<header class="major">
 								<h2>US States with Most Covid Cases</h2>
@@ -172,7 +183,16 @@
 							<div class="chart-container" style="position: relative;">
 								<canvas id="state_covid" width=500 height=400>
 							</div>
+
+							<header class="major">
+								<h2>US Cases Over Time</h2>
+							</header>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="global_covid2" width=500 height=400>
+							</div>
 						</section>
+
+						
 
 						<!-- Second Section -->
 						<section id="second" class="main special">
@@ -263,9 +283,16 @@
 									<% 	} %>
 									  </ul>
 									</div>
+									
+									<header class="major">
+										<h2>Unemployment Rates for States with Most COVID-19 Cases</h2>
+									  </header>
+									<div class="chart-container" style="position: relative;">
+									  <canvas id="state_unemployment" width=500 height=400>
+									</div>	    
 									<footer class="major">
 									  <p>
-									still need to figure out
+									Last Updated: 2020-10-31
 									  </p>
 									</footer>
 								
@@ -452,6 +479,62 @@
 				var jsonArray = [Q1_2019, Q2_2019, Q3_2019, Q4_2019, Q1_2020, Q2_2020, Q3_2020];
 			    return jsonArray;
 			}
+
+			function formatgc2Data(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+				var date2 = [];
+				var sum_cases = [];
+				var sum_deaths = [];
+			    for(var i = 0; i < dataArray.length; i++) {
+					date2[i] = dataArray[i].date2;
+					sum_cases[i] = dataArray[i].sum_cases;
+					sum_deaths[i] = dataArray[i].sum_deaths;
+			    }
+				var jsonArray = [date2, sum_cases, sum_deaths];
+			    return jsonArray;
+			}
+
+			function formatsuData(dataArray) {
+				console.log("data sent length: "+dataArray.length);
+				var date = [];
+				var u_state1 = [];
+				var u_state2 = [];
+				var u_state3 = [];
+				var u_state4 = [];
+				var u_state5 = [];
+				var state1 = "New York";
+				var state2 = "Texas";
+				var state3 = "California";
+				var state4 = "Florida";
+				var state5 = "New Jersey";
+				var i1 = 0;
+				var i2 = 0;
+				var i3 = 0;
+				var i4 = 0;
+				var i5 = 0;
+	    
+				for(var i = 0; i < dataArray.length; i++) {
+				if (dataArray[i]["StateName"] == state1) {
+					u_state1[i1] = dataArray[i]["InsuredUnemploymentRate"];
+					date[i1++] = [dataArray[i]["FiledWeekEnded"][0]+
+						  dataArray[i]["FiledWeekEnded"][1]+
+						  dataArray[i]["FiledWeekEnded"][2]+
+						  dataArray[i]["FiledWeekEnded"][3]+
+						  dataArray[i]["FiledWeekEnded"][4]+
+						  dataArray[i]["FiledWeekEnded"][5]+
+						  dataArray[i]["FiledWeekEnded"][6]+
+						  dataArray[i]["FiledWeekEnded"][7]+
+						  dataArray[i]["FiledWeekEnded"][8]+
+						  dataArray[i]["FiledWeekEnded"][9]];
+				}
+				if (dataArray[i]["StateName"] == state2) { u_state2[i2++] = dataArray[i]["InsuredUnemploymentRate"];}
+				if (dataArray[i]["StateName"] == state3) { u_state3[i3++] = dataArray[i]["InsuredUnemploymentRate"];}
+				if (dataArray[i]["StateName"] == state4) { u_state4[i4++] = dataArray[i]["InsuredUnemploymentRate"];}
+				if (dataArray[i]["StateName"] == state5) { u_state5[i5++] = dataArray[i]["InsuredUnemploymentRate"];}
+				}
+				var jsonArray = [date, [state1,state2,state3,state4,state5], u_state1, u_state2, u_state3, u_state4, u_state5];
+				return jsonArray;
+			}
 	
 	
 			$.post("http://localhost:8080/state_covid", function(data) {
@@ -632,6 +715,95 @@
 							}
 						});
 					})
+
+				$.post("http://localhost:8080/global_covid2", function(data) {
+				listdata = formatgc2Data(data);
+				var ctx = document.getElementById('global_covid2').getContext('2d');
+				var chart = new Chart(ctx, {
+					// The type of chart we want to create
+					type: 'line',
+					// The data for our dataset
+					data: {
+						labels: ['Dec2019', 'Jan2020', 'Feb2020', 'Mar2020', 'Apr2020', 'May2020', 'Jun2020', 'Jul2020', 'Aug2020', 'Sep2020', 'Oct2020', 'Nov2020'],
+						datasets: [{ 
+						data: listdata[1],
+						label: "New Cases",
+						borderColor: "#3e95cd",
+						fill: false
+					  },{ 
+						data: listdata[2],
+						label: "New Deaths",
+						borderColor: "#ff5733",
+						fill: false
+					  }]
+					},
+		
+				options: {
+					scales: {
+					yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'Count',
+					
+						},
+						
+					}]
+					}
+				}
+				});
+			})
+
+			$.post("http://localhost:8080/state_unemployment", function(data) {
+			console.log(data)
+			listdata = formatsuData(data);
+			var ctx = document.getElementById('state_unemployment').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+		
+			// The data for our dataset
+			data: {
+				labels: listdata[0],
+				datasets: [{ 
+				data: listdata[2],
+				label: listdata[1][0],
+				borderColor: "#3e95cd",
+				fill: false
+				}, {
+				data: listdata[3],
+				label: listdata[1][1],
+				borderColor: "#ff5733",
+				fill: false
+				}, {
+		    		data: listdata[4],
+				label: listdata[1][2],
+				borderColor: "#ffe933",
+				fill: false
+				}, {
+		    		data: listdata[5],
+				label: listdata[1][3],
+				borderColor: "#53ff33",
+				fill: false
+				}, {
+		    		data: listdata[6],
+				label: listdata[1][4],
+				borderColor: "#8a8789",
+				fill: false
+				}]
+			},
+		
+			options: {
+				scales: {
+				yAxes: [{
+					scaleLabel: {
+					display: true,
+					labelString: 'Insured Unemployment Rate',
+					}
+				}]
+				}
+			}
+			});
+		})
 
       </script>
 

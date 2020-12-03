@@ -125,6 +125,31 @@ app.post('/national_impexp', function (req, res) {
     });
 })
 
+app.post('/global_covid2', function (req, res) {
+
+    mysqlConnection.query("SELECT EXTRACT(YEAR_MONTH FROM gc.Date) AS date2, SUM(gc.NewCases) as sum_cases, SUM(gc.NewDeaths) as sum_deaths FROM global_covid gc WHERE gc.CountryName = 'United States' GROUP BY date2 ORDER BY date2", (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            res.send(rows);
+        }
+    });
+})
+
+app.post('/state_unemployment', function (req, res) {
+
+    mysqlConnection.query("SELECT su.StateName, su.FiledWeekEnded, su.InitialClaims, su.ContinuedClaims, su.InsuredUnemploymentRate FROM state_unemployment su WHERE su.StateName IN ('New York','Texas','California','Florida','New Jersey') AND su.FiledWeekEnded > '2020-01-01' ORDER BY su.FiledWeekEnded", (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            res.send(rows);
+        }
+    });
+})
+
+
 app.post('/worldmap', function (req, res) {
     const NS_PER_SEC = 1e9;
     const time = process.hrtime();
@@ -156,6 +181,39 @@ app.post('/worldmap', function (req, res) {
         } else {
             const diff = process.hrtime(time);
             console.log(`Benchmark took ${diff[0] * NS_PER_SEC + diff[1]} seconds`);
+            res.send({
+                data: rows,
+                elapsed: diff[0] * NS_PER_SEC + diff[1]
+            });
+        }
+    });
+})
+
+
+app.post('/usamap', function (req, res) {
+    const NS_PER_SEC = 1e9;
+    const time = process.hrtime();
+    mysqlConnection.query(`select
+                            sc.State,
+                            s2.StateName,
+                            sc.TotalDeaths,
+                            sc.DeathIncrease as NewDeaths,
+                            sc.Positive as TotalCases,
+                            sc.PositiveIncrease as NewCases
+                        from
+                            state_covid sc
+                        join states s2 on
+                            s2.StateCode = sc.State
+                        where
+                            sc.Date = "2020-11-18"
+                        group by
+                            sc.State`, (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            const diff = process.hrtime(time);
+            console.log(`usamap: ${diff[0] * NS_PER_SEC + diff[1]} seconds`);
             res.send({
                 data: rows,
                 elapsed: diff[0] * NS_PER_SEC + diff[1]
