@@ -34,7 +34,7 @@
 							<li><a href="#first">State COVID</a></li>
 							<li><a href="#second">GDP</a></li>
 							<li><a href="#third">Import and Exports</a></li>
-							<li><a href="#fourth">Unemployment Rates</a></li>
+							<li><a href="#fourth">Unemployment</a></li>
 							<li><a href="#cta">Data Sources</a></li>
 						</ul>
 					</nav>
@@ -45,9 +45,12 @@
 						<!-- Introduction -->
 						<section id="intro" class="main special">
 
+						<header class="major">
+								<h1>Global COVID-19 Section</h1>
+							</header>
+
 							<header class="major">
 								<h2>World Map COVID-19 Data</h2>
-								<h4>Last Updated: 2020-11-18</h4>
 							</header>
 							<div id="svgMapGPD"></div>
 							<script src="assets/js/gdp.js"></script>
@@ -69,6 +72,7 @@
 						document.getElementById("worldmaptime").innerHTML = timeelapsed + " nanoseconds";
 					}, 1000);</script>
 							</ul>
+							<p>Last Updated: 11-18-2020</p>
 							</footer>
 
                             
@@ -76,6 +80,10 @@
 
 						<!-- First Section -->
 						<section id="first" class="main special">
+
+						<header class="major">
+								<h1>State COVID-19 Section</h1>
+							</header>
 
 							<header class="major">
                                 <h2>US State COVID-19 Data</h2>
@@ -162,20 +170,43 @@
                                 </div>
                                 <div class="table_footer"></div>
                             </div>
+							<footer class="major">
+									  <p>
+									Last Updated: 11-18-2020
+									  </p>
+							</footer>
+
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
 
 							<header class="major">
 								<h2>US Map COVID-19 Data</h2>
 							</header>
                             
 							<div id="usamap"></div>
-								<footer class="major">
+								<body class="major">
 									<ul>
 										<li>Elapsed Query Time: <a id="usamaptime"></a></li>
 										<script>setTimeout(() => {  
 											document.getElementById("usamaptime").innerHTML = usaelapsed + " nanoseconds";
 										}, 1000);</script>
 									</ul>
-								</footer>
+								</body>
+
+								<footer class="major">
+									  <p>
+									Last Updated: 11-18-2020
+									  </p>
+							</footer>
+
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
 
 							<header class="major">
 								<h2>US States with Most Covid Cases</h2>
@@ -183,6 +214,18 @@
 							<div class="chart-container" style="position: relative;">
 								<canvas id="state_covid" width=500 height=400>
 							</div>
+
+							<footer class="major">
+									  <p>
+									Last Updated: 11-18-2020
+									  </p>
+							</footer>
+
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
 
 							<header class="major">
 								<h2>US Cases Over Time</h2>
@@ -196,16 +239,38 @@
 
 						<!-- Second Section -->
 						<section id="second" class="main special">
+
+						<header class="major">
+								<h1>GDP Section</h1>
+							</header>
+
 							<header class="major">
 									<h2>US National GDP</h2>
 							</header>
 							<div class="chart-container" style="position: relative;">
 								<canvas id="national_gdp" width=500 height=400>
 							</div>
+
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+
+							<header class="major">
+								<h2>US Personal Consumption</h2>
+							</header>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="national_pc" width=500 height=400>
+							</div>
 						</section>
 
 						<!-- Third Section -->
 						<section id="third" class="main special">
+
+						<header class="major">
+								<h1>Imports and Exports Section</h1>
+							</header>
 
 							<header class="major">
 									<h2>US Imports and Exports</h2>
@@ -214,16 +279,41 @@
 								<canvas id="national_impexp" width=500 height=400>
 							</div>
 
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+
 							<header class="major">
 								<h2>US Imports by Category</h2>
 							</header>
 							<div class="chart-container" style="position: relative;">
 								<canvas id="country_imports" width=500 height=400>
 							</div>
+
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+
+							<header class="major">
+								<h2>US Exports by Category</h2>
+							</header>
+							<div class="chart-container" style="position: relative;">
+								<canvas id="national_egs" width=500 height=400>
+							</div>
+
 						</section>
 
 						<!-- Fourth Section -->
 							<section id="fourth" class="main special">
+
+							<header class="major">
+								<h1>Unemployment Section</h1>
+							</header>
+
 								<header class="major">
 									<h2>US State Unemployment</h2>
 								  </header>
@@ -283,6 +373,17 @@
 									<% 	} %>
 									  </ul>
 									</div>
+									<footer class="major">
+									  <p>
+									Last Updated: 10-31-2020
+									  </p>
+									</footer>
+
+									<br>
+									<br>
+									<br>
+									<br>
+									<br>
 									
 									<header class="major">
 										<h2>Unemployment Rates for States with Most COVID-19 Cases</h2>
@@ -290,24 +391,41 @@
 									<div class="chart-container" style="position: relative;">
 									  <canvas id="state_unemployment" width=500 height=400>
 									</div>	    
-									<footer class="major">
-									  <p>
-									Last Updated: 2020-10-31
-									  </p>
-									</footer>
 								
 							</section>
 						<!-- Get Started -->
 							<section id="cta" class="main special">
-								<header class="major">
-									<h2>Data Sources</h2>
-									<p>Insert Data Sources Here</p>
-								</header>
-								<footer class="major">
-									
-								</footer>
 
-								
+							<header class="major">
+								<h1>Data Sources</h1>
+							</header>
+							
+							<dl>
+							  <dt>Effects of COVID-19</dt>
+							  <dd><a href="https://libguides.stanford.edu/covid19">https://libguides.stanford.edu/covid19</a></dd>
+							  <br>
+							  <dt>Global COVID-19 Data</dt>
+							  <dd><a href="https://ourworldindata.org/coronavirus-source-data">https://ourworldindata.org/coronavirus-source-data</a></dd>
+							  <br>
+							  <dt>State COVID-19 Data</dt>
+							  <dd><a href="https://covidtracking.com/data/download">https://covidtracking.com/data/download</a></dd>
+							  <br>
+							  <dt>Country Population Data</dt>
+							  <dd>*insert country popualation source from Hez</dd>
+							  <br>
+							  <dt>State Population Data</dt>
+							  <dd><a href="https://data.ers.usda.gov/reports.aspx?ID=17827">https://data.ers.usda.gov/reports.aspx?ID=17827</a></dd>
+							  <br>
+							  <dt>GDP, Imports, and Exports Data</dt>
+							  <dd><a href="https://apps.bea.gov/iTable/index_nipa.cfm">https://apps.bea.gov/iTable/index_nipa.cfm</a></dd>
+							  <br>
+							  <dt>Country Imports by Commodity Type</dt>
+							  <dd><a href="https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityimports">https://www.ons.gov.uk/economy/nationalaccounts/balanceofpayments/datasets/uktradecountrybycommodityimports</a></dd>
+							  <br>
+							  <dt>Unemployment Data</dt>
+							  <dd><a href="https://oui.doleta.gov/unemploy/claims.asp">https://oui.doleta.gov/unemploy/claims.asp</a></dd>
+							</dl>
+
 							</section>
 
 					</div>
@@ -316,20 +434,20 @@
 					<footer id="footer">
 						<section>
 							<h2>Thank you for viewing our website!</h2>
-							<p>We hope you enjoyed our website and learned something about how COVID-19 has effected the US and global economies.  Please, feel free to reach out to any of us by email if you have any questions.  By staying home, wearing your mask, social distancing, washing your hands frequently, and following CDC guidelines, we can overcome COVID-19 together!</p>
+							<p>We hope you enjoyed our website and learned something about how COVID-19 has affected the US and global economies.  Please, feel free to reach out to any of us by email if you have any questions.  By staying home, wearing your mask, social distancing, washing your hands frequently, and following CDC guidelines, we can overcome COVID-19 together!</p>
 							
 						</section>
 						<section>
 							<h2>Emails</h2>
 							<dl class="alt">
-								<dt>AveBisesi</dt>
-								<dd>email</dd>
-								<dt>BeccaDura</dt>
-								<dd>dura0083@umn.edu</dd>
-								<dt>HezkielNanda</dt>
-								<dd>email</a></dd>
-								<dt>SamJohnson</dt>
-								<dd>email</dd>
+								<dt>Ave&nbsp;Bisesi</dt>
+								<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bises004@umn.edu</dd>
+								<dt>Becca&nbsp;Dura</dt>
+								<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dura0083@umn.edu</dd>
+								<dt>Samuel&nbsp;Johnson</dt>
+								<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;joh13333@umn.edu</dd>
+								<dt>Hezkiel&nbsp;Nanda</dt>
+								<dd>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nanda072@umn.edu</a></dd>
 							</dl>
 							
 						</section>
@@ -480,6 +598,7 @@
 			    return jsonArray;
 			}
 
+
 			function formatgc2Data(dataArray) {
 			    console.log("data sent length: "+dataArray.length);
 				var date2 = [];
@@ -502,11 +621,11 @@
 				var u_state3 = [];
 				var u_state4 = [];
 				var u_state5 = [];
-				var state1 = "New York";
-				var state2 = "Texas";
-				var state3 = "California";
-				var state4 = "Florida";
-				var state5 = "New Jersey";
+				var state1 = "Null";
+				var state2 = "Null";
+				var state3 = "Null";
+				var state4 = "Null";
+				var state5 = "Null";
 				var i1 = 0;
 				var i2 = 0;
 				var i3 = 0;
@@ -514,6 +633,13 @@
 				var i5 = 0;
 	    
 				for(var i = 0; i < dataArray.length; i++) {
+				var state = dataArray[i]["StateName"];
+				if (state1 == "Null") { state1 = state;}
+				else if (state2 == "Null" && state1 != state) { state2 = state;}
+				else if (state3 == "Null" && state2 != state && state1 != state) { state3 = state;}
+				else if (state4 == "Null" && state3 != state && state2 != state && state1 != state) { state4 = state;}
+				else if (state5 == "Null" && state4 != state && state3 != state && state2 != state && state1 != state) { state5 = state;}
+		
 				if (dataArray[i]["StateName"] == state1) {
 					u_state1[i1] = dataArray[i]["InsuredUnemploymentRate"];
 					date[i1++] = [dataArray[i]["FiledWeekEnded"][0]+
@@ -534,6 +660,54 @@
 				}
 				var jsonArray = [date, [state1,state2,state3,state4,state5], u_state1, u_state2, u_state3, u_state4, u_state5];
 				return jsonArray;
+			}
+
+			function formatnpcData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+				var SubCategory1 = [];
+				var Q1_2019 = [];
+				var Q2_2019 = [];
+				var Q3_2019 = [];
+				var Q4_2019 = [];
+				var Q1_2020 = [];
+				var Q2_2020 = [];
+				var Q3_2020 = [];
+			    for(var i = 0; i < dataArray.length; i++) {
+					SubCategory1[i] = dataArray[i].SubCategory1;
+					Q1_2019[i] = dataArray[i].Q1_2019;
+					Q2_2019[i] = dataArray[i].Q2_2019;
+					Q3_2019[i] = dataArray[i].Q3_2019;
+					Q4_2019[i] = dataArray[i].Q4_2019;
+					Q1_2020[i] = dataArray[i].Q1_2020;
+					Q2_2020[i] = dataArray[i].Q2_2020;
+					Q3_2020[i] = dataArray[i].Q3_2020;
+			    }
+				var jsonArray = [SubCategory1, Q1_2019, Q2_2019, Q3_2019, Q4_2019, Q1_2020, Q2_2020, Q3_2020];
+			    return jsonArray;
+			}
+
+			function formatnegsData(dataArray) {
+			    console.log("data sent length: "+dataArray.length);
+				var SubCategory1 = [];
+				var Q1_2019 = [];
+				var Q2_2019 = [];
+				var Q3_2019 = [];
+				var Q4_2019 = [];
+				var Q1_2020 = [];
+				var Q2_2020 = [];
+				var Q3_2020 = [];
+			    for(var i = 0; i < dataArray.length; i++) {
+			        SubCategory1[i] = dataArray[i].SubCategory1;
+					Q1_2019[i] = dataArray[i].Q1_2019;
+					Q2_2019[i] = dataArray[i].Q2_2019;
+					Q3_2019[i] = dataArray[i].Q3_2019;
+					Q4_2019[i] = dataArray[i].Q4_2019;
+					Q1_2020[i] = dataArray[i].Q1_2020;
+					Q2_2020[i] = dataArray[i].Q2_2020;
+					Q3_2020[i] = dataArray[i].Q3_2020;
+			    }
+				var jsonArray = [SubCategory1, Q1_2019, Q2_2019, Q3_2019, Q4_2019, Q1_2020, Q2_2020, Q3_2020];
+			    return jsonArray;
 			}
 	
 	
@@ -594,7 +768,7 @@
 					  },{ 
 						data: [listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1], listdata[8][1], listdata[9][1], listdata[10][1], listdata[11][1], listdata[12][1], listdata[13][1], listdata[14][1], listdata[15][1], listdata[16][1], listdata[17][1], listdata[18][1], listdata[19][1], listdata[20][1], listdata[21][1]],
 						label: listdata[0][1],
-						borderColor: "#ff5733",
+						borderColor: "#f69006",
 						fill: false
 					  },{ 
 						data: [listdata[1][2], listdata[2][2], listdata[3][2], listdata[4][2], listdata[5][2], listdata[6][2], listdata[7][2], listdata[8][2], listdata[9][2], listdata[10][2], listdata[11][2], listdata[12][2], listdata[13][2], listdata[14][2], listdata[15][2], listdata[16][2], listdata[17][2], listdata[18][2], listdata[19][2], listdata[20][2], listdata[21][2]],
@@ -609,7 +783,7 @@
 					  },{ 
 						data: [listdata[1][4], listdata[2][4], listdata[3][4], listdata[4][4], listdata[5][4], listdata[6][4], listdata[7][4], listdata[8][4], listdata[9][4], listdata[10][4], listdata[11][4], listdata[12][4], listdata[13][4], listdata[14][4], listdata[15][4], listdata[16][4], listdata[17][4], listdata[18][4], listdata[19][4], listdata[20][4], listdata[21][4]],
 						label: listdata[0][4],
-						borderColor: "#ff333c",
+						borderColor: "#047238",
 						fill: false
 					  },{ 
 						data: [listdata[1][5], listdata[2][5], listdata[3][5], listdata[4][5], listdata[5][5], listdata[6][5], listdata[7][5], listdata[8][5], listdata[9][5], listdata[10][5], listdata[11][5], listdata[12][5], listdata[13][5], listdata[14][5], listdata[15][5], listdata[16][5], listdata[17][5], listdata[18][5], listdata[19][5], listdata[20][5], listdata[21][5]],
@@ -634,7 +808,7 @@
 					  },{ 
 						data: [listdata[1][9], listdata[2][9], listdata[3][9], listdata[4][9], listdata[5][9], listdata[6][9], listdata[7][9], listdata[8][9], listdata[9][9], listdata[10][9], listdata[11][9], listdata[12][9], listdata[13][9], listdata[14][9], listdata[15][9], listdata[16][9], listdata[17][9], listdata[18][9], listdata[19][9], listdata[20][9], listdata[21][9]],
 						label: listdata[0][9],
-						borderColor: "#047238",
+						borderColor: "#d6162a",
 						fill: false
 					  }]
 					},
@@ -644,7 +818,7 @@
 					yAxes: [{
 						scaleLabel: {
 						display: true,
-						labelString: 'Amount',
+						labelString: 'Billions of Dollars',
 						}
 					}]
 					}
@@ -687,6 +861,8 @@
 				});
 			})
 
+			const decimals = 1
+			
 			$.post("http://localhost:8080/national_gdp", function(data) {
 						listdata = formatngData(data);
 						var ctx = document.getElementById('national_gdp').getContext('2d');
@@ -695,20 +871,25 @@
 							type: 'bar',
 							// The data for our dataset
 							data: {
-								labels: ['First Quarter 2019', 'Second Quarter 2019', 'Third Quarter 2019', 'Fourth Quarter 2019', 'First Quarter 2020', 'Second Quarter 2020', 'Third Quarter 2020'],
+								labels: ['First Quarter 2019', 'Second Quarter 2019', 'Third Quarter 2019', 'Fourth Quarter 2019', 'First Quarter 2020', 'Second Quarter 2020', 'Third Quarter 2020',],
 								datasets: [{
-									label: 'National GDP',
+									label: 'GDP Growth',
 									backgroundColor: 'rgb(255, 0, 132)',
 									borderColor: 'rgb(255, 0, 132)',
-									data: listdata
+									data: [((21115.3-20909.9)/20909.9)*100, ((21329.9-21115.3)/21115.3)*100, ((21540.3-21329.9)/21329.9)*100, ((21747.4-21540.3)/21540.3)*100, ((21561.1-21747.4)/21747.4)*100, ((19520.1-21561.1)/21561.1)*100, ((21157.6-19520.1)/19520.1)*100] 
 								}]
 							},
 							options: {
 								scales: {
 									yAxes: [{
+										ticks: {
+											callback: function(value, index, values){
+												return value.toFixed(decimals) + '%';
+											}
+										},
 										scaleLabel: {
 											display: true,
-											labelString: 'Billions of Dollars',
+											labelString: 'Quarterly GDP Growth',
 										},
 									}]
 								}
@@ -804,6 +985,98 @@
 			}
 			});
 		})
+
+		$.post("http://localhost:8080/national_pc", function(data) {
+				listdata = formatnpcData(data);
+				var ctx = document.getElementById('national_pc').getContext('2d');
+				var chart = new Chart(ctx, {
+					// The type of chart we want to create
+					type: 'line',
+					// The data for our dataset
+					data: {
+						labels: ['First Quarter 2019', 'Second Quarter 2019', 'Third Quarter 2019', 'Fourth Quarter 2019', 'First Quarter 2020', 'Second Quarter 2020', 'Third Quarter 2020'],
+						datasets: [{ 
+						data: [listdata[1][0], listdata[2][0], listdata[3][0], listdata[4][0], listdata[5][0], listdata[6][0], listdata[7][0]],
+						label: listdata[0][0],
+						borderColor: "#3e95cd",
+						fill: false
+					  },{ 
+						data: [listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1]],
+						label: listdata[0][1],
+						borderColor: "#ff5733",
+						fill: false
+					  }]
+					},
+		
+				options: {
+					scales: {
+					yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'Billions of Dollars',
+						}
+					}]
+					}
+				}
+				});
+			})
+			
+			$.post("http://localhost:8080/national_egs", function(data) {
+				listdata = formatnegsData(data);
+				var ctx = document.getElementById('national_egs').getContext('2d');
+				var chart = new Chart(ctx, {
+					// The type of chart we want to create
+					type: 'line',
+					// The data for our dataset
+					data: {
+						labels: ['First Quarter 2019', 'Second Quarter 2019', 'Third Quarter 2019', 'Fourth Quarter 2019', 'First Quarter 2020', 'Second Quarter 2020', 'Third Quarter 2020'],
+						datasets: [{ 
+						data: [listdata[1][0], listdata[2][0], listdata[3][0], listdata[4][0], listdata[5][0], listdata[6][0], listdata[7][0]],
+						label: listdata[0][0],
+						borderColor: "#3e95cd",
+						fill: false
+					  },{ 
+						data: [listdata[1][1], listdata[2][1], listdata[3][1], listdata[4][1], listdata[5][1], listdata[6][1], listdata[7][1]],
+						label: listdata[0][1],
+						borderColor: "#33fdff",
+						fill: false
+					},{ 
+						data: [listdata[1][2], listdata[2][2], listdata[3][2], listdata[4][2], listdata[5][2], listdata[6][2], listdata[7][2]],
+						label: listdata[0][2],
+						borderColor: "#ffe933",
+						fill: false
+						},{ 
+						data: [listdata[1][3], listdata[2][3], listdata[3][3], listdata[4][3], listdata[5][3], listdata[6][3], listdata[7][3]],
+						label: listdata[0][3],
+						borderColor: "#53ff33",
+						fill: false
+						},{ 
+						data: [listdata[1][4], listdata[2][4], listdata[3][4], listdata[4][4], listdata[5][4], listdata[6][4], listdata[7][4]],
+						label: listdata[0][4],
+						borderColor: "#ff333c",
+						fill: false
+						},{ 
+						data: [listdata[1][5], listdata[2][5], listdata[3][5], listdata[4][5], listdata[5][5], listdata[6][5], listdata[7][5]],
+						label: listdata[0][5],
+						borderColor: "#8a8789",
+						fill: false
+					  }]
+					},
+		
+				options: {
+					scales: {
+					yAxes: [{
+						scaleLabel: {
+						display: true,
+						labelString: 'Billions of Dollars',
+						}
+					}]
+					}
+				}
+				});
+			})
+
+
 
       </script>
 

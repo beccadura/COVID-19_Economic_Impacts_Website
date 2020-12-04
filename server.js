@@ -139,7 +139,30 @@ app.post('/global_covid2', function (req, res) {
 
 app.post('/state_unemployment', function (req, res) {
 
-    mysqlConnection.query("SELECT su.StateName, su.FiledWeekEnded, su.InitialClaims, su.ContinuedClaims, su.InsuredUnemploymentRate FROM state_unemployment su WHERE su.StateName IN ('New York','Texas','California','Florida','New Jersey') AND su.FiledWeekEnded > '2020-01-01' ORDER BY su.FiledWeekEnded", (err, rows, fields) => {
+    mysqlConnection.query("SELECT su.StateName, su.FiledWeekEnded, su.InitialClaims, su.ContinuedClaims, su.InsuredUnemploymentRate FROM (SELECT s.StateName, sc.Positive FROM states s JOIN state_covid sc ON s.StateCode = sc.State WHERE sc.Date = '2020-11-18' GROUP BY s.StateName ORDER BY sc.Positive DESC LIMIT 5) a JOIN state_unemployment su ON su.StateName = a.StateName WHERE su.FiledWeekEnded > '2020-01-01' ORDER BY su.FiledWeekEnded", (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            res.send(rows);
+        }
+    });
+})
+
+app.post('/national_pc', function (req, res) {
+
+    mysqlConnection.query('SELECT ng.SubCategory1, ng.Q1_2019, ng.Q2_2019, ng.Q3_2019, ng.Q4_2019, ng.Q1_2020, ng.Q2_2020, ng.Q3_2020 FROM national_gdp ng WHERE ng.Category = "Personal consumption expenditures" AND (ng.SubCategory1 = "Goods" OR ng.SubCategory1 = "Services") AND (ng.SubCategory2 = "Overall")', (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            res.send(rows);
+        }
+    });
+})
+
+app.post('/national_egs', function (req, res) {
+    mysqlConnection.query('SELECT nei.Category, nei.SubCategory1, nei.Q1_2019, nei.Q2_2019, nei.Q3_2019, nei.Q4_2019, nei.Q1_2020, nei.Q2_2020, nei.Q3_2020 FROM national_exports_imports nei WHERE nei.Category = "Exports of goods" AND nei.SubCategory2="Overall" AND NOT nei.SubCategory1="Overall"', (err, rows, fields) => {
         if (err) {
             console.error('error connecting: ' + err.stack);
             return;

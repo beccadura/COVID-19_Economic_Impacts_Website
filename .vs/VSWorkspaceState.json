@@ -3,8 +3,9 @@
     "",
     "\\views",
     "\\views\\assets",
+    "\\views\\assets\\css",
     "\\views\\pages"
   ],
-  "SelectedNode": "\\server.js",
+  "SelectedNode": "\\views\\assets\\css\\main.css",
   "PreviewInSolutionExplorer": false
 }
