@@ -34,4 +34,4 @@ express server is running at port 8080
 DB connection successful!
 ```
 
-8. Your website should be up and running at: http://localhost:8080
+9. Your website should be up and running at: http://localhost:8080
