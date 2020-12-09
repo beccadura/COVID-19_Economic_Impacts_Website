@@ -1,6 +1,8 @@
 var datausamap = {},
   dataus =[],
-  usaelapsed = 0;
+  usaelapsed = 0,
+  usaelapsed_clus = 0,
+  usaelapsed_nonclus = 0;
 
 function setcolor(numinput){
   var colorset = "";
@@ -36,6 +38,15 @@ $.post("http://localhost:8080/usamap", function(usadata){
     };
   }
 });
+
+$.post("http://localhost:8080/usamap_clustered", function(usadata){
+  usaelapsed_clus = usadata.elapsed_clustered;
+});
+
+$.post("http://localhost:8080/usamap_nonclustered", function(usadata){
+  usaelapsed_nonclus = usadata.elapsed_nonclustered;
+});
+
 var simplemaps_usmap_mapdata={
   main_settings: {
     //General settings

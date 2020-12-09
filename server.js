@@ -203,10 +203,91 @@ app.post('/worldmap', function (req, res) {
             return;
         } else {
             const diff = process.hrtime(time);
-            console.log(`Benchmark took ${diff[0] * NS_PER_SEC + diff[1]} seconds`);
             res.send({
                 data: rows,
                 elapsed: diff[0] * NS_PER_SEC + diff[1]
+            });
+        }
+    });
+})
+
+
+
+app.post('/worldmap_nonclustered', function (req, res) {
+    // ALTER TABLE global_covid_2 ADD CONSTRAINT pk_code_date
+    // PRIMARY KEY NONCLUSTERED (CountryCode, Date);
+
+    const NS_PER_SEC = 1e9;
+    const time = process.hrtime();
+    mysqlConnection.query(`select
+                            cp.CountryCode_iso2 as CountryCode,
+                            gc.TotalCases,
+                            gc.TotalDeaths,
+                            gc.MedianAge,
+                            cp.pop_2019,
+                            cp.pop_2020
+                        from
+                            global_covid_2 gc
+                        join (
+                            select
+                                c1.CountryCode_iso2,
+                                cp1.2019Population as pop_2019,
+                                cp1.2020Population as pop_2020,
+                                cp1.CountryCode
+                            from
+                                country_population cp1
+                            join countries c1 on
+                                c1.CountryCode_iso3 = cp1.CountryCode )cp on
+                            cp.CountryCode = gc.CountryCode
+                        where
+                            gc.Date = '2020-11-18'`, (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            const diff = process.hrtime(time);
+            res.send({
+                elapsed_nonclustered: diff[0] * NS_PER_SEC + diff[1]
+            });
+        }
+    });
+})
+
+app.post('/worldmap_clustered', function (req, res) {
+    // ALTER TABLE global_covid_1 ADD CONSTRAINT pk_code_date
+    // PRIMARY KEY CLUSTERED (CountryCode, Date);
+
+    const NS_PER_SEC = 1e9;
+    const time = process.hrtime();
+    mysqlConnection.query(`select
+                            cp.CountryCode_iso2 as CountryCode,
+                            gc.TotalCases,
+                            gc.TotalDeaths,
+                            gc.MedianAge,
+                            cp.pop_2019,
+                            cp.pop_2020
+                        from
+                            global_covid_1 gc
+                        join (
+                            select
+                                c1.CountryCode_iso2,
+                                cp1.2019Population as pop_2019,
+                                cp1.2020Population as pop_2020,
+                                cp1.CountryCode
+                            from
+                                country_population cp1
+                            join countries c1 on
+                                c1.CountryCode_iso3 = cp1.CountryCode )cp on
+                            cp.CountryCode = gc.CountryCode
+                        where
+                            gc.Date = '2020-11-18'`, (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            const diff = process.hrtime(time);
+            res.send({
+                elapsed_clustered: diff[0] * NS_PER_SEC + diff[1]
             });
         }
     });
@@ -240,6 +321,72 @@ app.post('/usamap', function (req, res) {
             res.send({
                 data: rows,
                 elapsed: diff[0] * NS_PER_SEC + diff[1]
+            });
+        }
+    });
+})
+
+app.post('/usamap_nonclustered', function (req, res) {
+    // ALTER TABLE state_covid_2 ADD CONSTRAINT pk_code_date
+    // PRIMARY KEY NONCLUSTERED (State, Date);
+
+    const NS_PER_SEC = 1e9;
+    const time = process.hrtime();
+    mysqlConnection.query(`select
+                            sc.State,
+                            s2.StateName,
+                            sc.TotalDeaths,
+                            sc.DeathIncrease as NewDeaths,
+                            sc.Positive as TotalCases,
+                            sc.PositiveIncrease as NewCases
+                        from
+                            state_covid_2 sc
+                        join states s2 on
+                            s2.StateCode = sc.State
+                        where
+                            sc.Date = "2020-11-18"
+                        group by
+                            sc.State`, (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            const diff = process.hrtime(time);
+            res.send({
+                elapsed_nonclustered: diff[0] * NS_PER_SEC + diff[1]
+            });
+        }
+    });
+})
+
+app.post('/usamap_clustered', function (req, res) {
+    // ALTER TABLE state_covid_1 ADD CONSTRAINT pk_code_date
+    // PRIMARY KEY CLUSTERED (State, Date);
+
+    const NS_PER_SEC = 1e9;
+    const time = process.hrtime();
+    mysqlConnection.query(`select
+                            sc.State,
+                            s2.StateName,
+                            sc.TotalDeaths,
+                            sc.DeathIncrease as NewDeaths,
+                            sc.Positive as TotalCases,
+                            sc.PositiveIncrease as NewCases
+                        from
+                            state_covid_1 sc
+                        join states s2 on
+                            s2.StateCode = sc.State
+                        where
+                            sc.Date = "2020-11-18"
+                        group by
+                            sc.State`, (err, rows, fields) => {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        } else {
+            const diff = process.hrtime(time);
+            res.send({
+                elapsed_clustered: diff[0] * NS_PER_SEC + diff[1]
             });
         }
     });

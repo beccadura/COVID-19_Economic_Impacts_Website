@@ -23,7 +23,9 @@
 					<header id="header" class="alt">
 						<span class="logo"><img src="assets/img/logo.svg" alt="" /></span>
 						<h1>COVID-19 Informational Website</h1>
-						<p>CSCI5707 Team 9 Project<br />
+						<p>University of Minnesota- Twin Cities<br />
+						CSCI5707 Team 9 Project<br />
+						Fall 2020 <br />
 						  Ave Bisesi, Becca Dura, Samuel Johnson, Hezkiel Nanda</p>
 					</header>
 
@@ -56,23 +58,29 @@
 							<script src="assets/js/gdp.js"></script>
 							<script src="assets/js/countriesEN.js"></script>
 							<script>
-							setTimeout(() => {  
-							new svgMap({
-								targetElementID: 'svgMapGPD',
-								data: svgMapDataGPD,
-								colorMin: '#FFF0F9',
-								colorMax: '#730B62'
-							});
-							}, 1000);
+								setTimeout(() => {  
+									new svgMap({
+										targetElementID: 'svgMapGPD',
+										data: svgMapDataGPD,
+										colorMin: '#FFF0F9',
+										colorMax: '#730B62'
+									});
+								}, 1000);
 							</script>
 							<footer class="major">
-							<ul>
-								<li>Elapsed Query Time: <a id="worldmaptime"></a></li>
-								<script>setTimeout(() => {  
-						document.getElementById("worldmaptime").innerHTML = timeelapsed + " nanoseconds";
-					}, 1000);</script>
-							</ul>
-							<p>Last Updated: 11-18-2020</p>
+								<ul>
+									<li>Last Updated: 11-18-2020</li>
+									<li>Elapsed Query Time (No Index): <a id="worldmaptime"></a></li>
+									<li>Elapsed Query Time (Clustered Index): <a id="world_clus"></a></li>
+									<li>Elapsed Query Time (Non-Clustered Index): <a id="world_nonclus"></a></li>
+									<script>
+										setTimeout(() => {  
+											document.getElementById("worldmaptime").innerHTML = timeelapsed + " nanoseconds";
+											document.getElementById("world_clus").innerHTML = worldelapsed_clus + " nanoseconds ("+Number(((worldelapsed_clus-timeelapsed)/timeelapsed*100).toPrecision(4))+"% compared with No Index)";
+											document.getElementById("world_nonclus").innerHTML = worldelapsed_nonclus + " nanoseconds ("+Number(((worldelapsed_nonclus-timeelapsed)/timeelapsed*100).toPrecision(4))+"% compared with No Index)";
+										}, 1000);
+									</script>
+								</ul>
 							</footer>
 
                             
@@ -187,19 +195,18 @@
 							</header>
                             
 							<div id="usamap"></div>
-								<body class="major">
-									<ul>
-										<li>Elapsed Query Time: <a id="usamaptime"></a></li>
-										<script>setTimeout(() => {  
-											document.getElementById("usamaptime").innerHTML = usaelapsed + " nanoseconds";
-										}, 1000);</script>
-									</ul>
-								</body>
-
-								<footer class="major">
-									  <p>
-									Last Updated: 11-18-2020
-									  </p>
+							<footer class="major">
+								<ul>
+									<li>Last Updated: 11-18-2020</li>
+									<li>Elapsed Query Time (No Index): <a id="usamaptime"></a></li>
+									<li>Elapsed Query Time (Clustered Index): <a id="usa_clus"></a></li>
+									<li>Elapsed Query Time (Non-Clustered Index): <a id="usa_nonclus"></a></li>
+									<script>setTimeout(() => {  
+										document.getElementById("usamaptime").innerHTML = usaelapsed + " nanoseconds";
+										document.getElementById("usa_clus").innerHTML = usaelapsed_clus + " nanoseconds ("+Number(((usaelapsed_clus-usaelapsed)/usaelapsed*100).toPrecision(4))+"% compared with No Index)";
+										document.getElementById("usa_nonclus").innerHTML = usaelapsed_nonclus + " nanoseconds("+Number(((usaelapsed_nonclus-usaelapsed)/usaelapsed*100).toPrecision(4))+"% compared with No Index)";
+									}, 1000);</script>
+								</ul>
 							</footer>
 
 							<br>

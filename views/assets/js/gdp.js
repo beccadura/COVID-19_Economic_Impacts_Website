@@ -1,7 +1,10 @@
 
 var data = {},
   datad =[],
-  timeelapsed = 0;
+  timeelapsed = 0,
+  worldelapsed_clus = 0,
+  worldelapsed_nonclus = 0;
+
 $.post("http://localhost:8080/worldmap", function(worlddata){
   datad = worlddata.data;
   timeelapsed = worlddata.elapsed;
@@ -14,6 +17,14 @@ $.post("http://localhost:8080/worldmap", function(worlddata){
       pop_2020: datad[d].pop_2020
     };
   }
+});
+
+$.post("http://localhost:8080/worldmap_clustered", function(worlddata){
+  worldelapsed_clus = worlddata.elapsed_clustered;
+});
+
+$.post("http://localhost:8080/worldmap_nonclustered", function(worlddata){
+  worldelapsed_nonclus = worlddata.elapsed_nonclustered;
 });
 var svgMapDataGPD = {
   data: {
