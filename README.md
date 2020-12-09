@@ -1,6 +1,8 @@
 ## CSCI5707 Team 9 Project COVID-19 Informational Website
 
-### The Steps:
+This repository contains the code and files necessary to get a website showing the current status of and economic impacts of COVID-19 across the United States as well as the entire world.  This website and database was created for our final project for CSCI5707 at the University of Minnesota- Twin Cities for the Fall 2020 semester.  To get the database and website up and running, follow the steps below.  After following all these steps once, you should be able to display the website anytime just by following steps 8 and 9.
+
+### Instructions:
 1. Install XAMPP 7.4.10 with your appropriate OS
 https://www.apachefriends.org/download.html
 
