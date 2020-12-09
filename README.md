@@ -17,12 +17,21 @@ http://localhost/phpmyadmin by creating a new database called "covid_economic_im
 
 6. Open Terminal and go to your local project folder.
 
-7. Run "npm install".
+7. Run the following to install the necessary node modules.
+```
+$ npm install
+```
 
-8. Run "npm start" to start the website.  You should receive the following output in the terminal:
+8. Run the following to start the website on your local computer.
+```
+$ npm start
+```
 
+You should receive the following output in the terminal:
+```
 output:
 express server is running at port 8080
 DB connection successful!
+```
 
 8. Your website should be up and running at: http://localhost:8080
