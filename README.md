@@ -1,43 +1,39 @@
-# csci5707proj
-## csci5707 Team 9 project COVID-19 Informational Website
+## CSCI5707 Team 9 Project COVID-19 Informational Website
 
-### The Steps:
+This repository contains the code and files necessary to get a website showing the current status of and economic impacts of COVID-19 across the United States as well as the entire world.  This website and database was created for our final project for CSCI5707 at the University of Minnesota- Twin Cities for the Fall 2020 semester.  To get the database and website up and running, follow the steps below.  After following all these steps once, you should be able to display the website anytime just by following steps 8 and 9.
+
+### Instructions:
 1. Install XAMPP 7.4.10 with your appropriate OS
 https://www.apachefriends.org/download.html
 
 2. Install NodeJS and npm 14.13.0 with your appropriate OS
 https://nodejs.org/en/
-Install necessary tools
+Install necessary tools.
 
-3. Open XAMPP control panel and switch on the MySQL and Apache Server
+3. Open XAMPP control panel and switch on the MySQL and Apache Server.
 
-4. Add database to the PHPMyAdmin
-http://localhost/phpmyadmin
+4. Clone this repository to your local project folder.
 
-Go to Tab SQL and Run Query:
+5. Add database to the PHPMyAdmin
+http://localhost/phpmyadmin by creating a new database called "covid_economic_impacts" and using the import tab in PHPMyAdmin to import "covid_economic_impacts.sql" from the Database folder in this repository.
 
-```SQL
-CREATE DATABASE sitepoint CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE sitepoint;
-```
-There are some datasets inside the sql folder.
-This is an sqldump file, you can just run it to add the dataset to your local mysql server.
-Make sure it goes to sitepoint database.
+6. Open Terminal and go to your local project folder.
 
-5. Clone all these files to your local project folder
-
-6. Install all prerequisites
-Open Terminal and go to the project folder
+7. Run the following to install the necessary node modules.
 ```
 $ npm install
 ```
-7. start the template website (this uses server.js). remember, do step (3) Open XAMPP control panel and switch on the MySQL and Apache Server
+
+8. Run the following to start the website on your local computer.
 ```
 $ npm start
+```
+
+You should receive the following output in the terminal:
 ```
 output:
 express server is running at port 8080
 DB connection successful!
+```
 
-8. Try http://localhost:8080
-if all goes well, should be the same with the screenshot
+9. Your website should be up and running at: http://localhost:8080
